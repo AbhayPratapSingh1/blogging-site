@@ -8,7 +8,7 @@ const AuthorBlock = ({ authors }) => {
 
     return (
         <section className="px-4 md:px-28 my-20 ">
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between items-baseline w-full">
                 <h2 className="py-4 text-2xl md:text-4xl">Top Author</h2>
                 <Link href={"/all-author-block"} >
                     <button className="text-md md:text-xl">All Author</button>

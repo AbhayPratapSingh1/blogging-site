@@ -8,9 +8,11 @@ export const FeaturedPostPostGrid = ({ blogs }) => {
         return
     }
     return (
-        <div className="p-1 lg:p-2 md:grid lg:grid-cols-2 w-full overflow-hidden">
+        <div className="xl:36  p-1 lg:p-2 md:flex lg:grid-cols-2 overflow-hidden">
             {/* main feature card */}
+
             <MainHeroPost item={blogs[0]} />
+
             <div className="grid sm:grid-cols-2 justify-center w-full lg:h-[700px] gap-1" >
                 {/* Troverse each side card one by one */}
                 {blogs && blogs.length >= 4 && blogs.slice(1, 5).map((each, key) => {

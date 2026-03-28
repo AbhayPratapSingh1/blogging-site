@@ -56,7 +56,6 @@ export const getNav = async () => {
 
 }
 
-
 export const getSocialMedia = async () => {
   const res = await handleRequest(APIS.SOCIAL_MEDIA);
   if (!res.ok) {
@@ -65,11 +64,6 @@ export const getSocialMedia = async () => {
   const data = await res.json();
   return data
 }
-
-
-
-
-
 
 export const getBlogs = async () => {
   const res = await handleRequest(APIS.BLOGS);
