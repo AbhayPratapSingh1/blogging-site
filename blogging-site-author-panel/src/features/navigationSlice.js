@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { navigationAPI } from '../api/navigationAPI'
-import {  setMessage } from './appSlice'
+import { setMessage } from './appSlice'
+import { useSelector } from 'react-redux'
 
 export const getAllNavigationRequest = createAsyncThunk("navigation/getAllNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {
-        const data= await navigationAPI.getAll(sendData)
+        const data = await navigationAPI.getAll(sendData)
         dispatch(setAllNavigation(data))
     } catch (error) {
         if (error.response) {
@@ -13,9 +14,9 @@ export const getAllNavigationRequest = createAsyncThunk("navigation/getAllNaviga
     }
 })
 
-export const addNewNavigationRequest = createAsyncThunk("navigation/addNewNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
+export const addNewNavigationRequest = createAsyncThunk("navigation/addNewNavigationRequest", async (submitValue, { dispatch, rejectWithValue }) => {
     try {
-        const data= await navigationAPI.addNew(sendData)
+        const data = await navigationAPI.addNew(submitValue)
         dispatch(setMessage(data.message))
     } catch (error) {
         if (error.response) {
@@ -26,7 +27,7 @@ export const addNewNavigationRequest = createAsyncThunk("navigation/addNewNaviga
 
 export const singleNavigationRequest = createAsyncThunk("navigation/singleNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {
-        const data= await navigationAPI.single(sendData)
+        const data = await navigationAPI.single(sendData)
         dispatch(setSingleNavigation(data))
     } catch (error) {
         if (error.response) {
@@ -39,7 +40,7 @@ export const singleNavigationRequest = createAsyncThunk("navigation/singleNaviga
 
 export const updateNavigationRequest = createAsyncThunk("navigation/updateNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {
-        const data= await navigationAPI.update(sendData)
+        const data = await navigationAPI.update(sendData)
         dispatch(setMessage(data.message))
     } catch (error) {
         if (error.response) {
@@ -49,7 +50,7 @@ export const updateNavigationRequest = createAsyncThunk("navigation/updateNaviga
 })
 export const deleteNavigationRequest = createAsyncThunk("navigation/deleteNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {
-        const data= await navigationAPI.delete(sendData)
+        const data = await navigationAPI.delete(sendData)
         dispatch(setMessage(data.message))
     } catch (error) {
         if (error.response) {
@@ -77,28 +78,28 @@ export const navigationSlice = createSlice({
             state.singleNavigation = action.payload
         },
         clearError: (state) => {
-            state.errorInNavigation =''
+            state.errorInNavigation = ''
         }
     }
-, extraReducers:(builder)=>{
-    builder.addCase(getAllNavigationRequest.rejected, (state, action)=>{
-        state.errorInNavigation= action.payload
-    }),
-    builder.addCase(addNewNavigationRequest.rejected, (state, action)=>{
-        state.errorInNavigation= action.payload
-    }),    builder.addCase(updateNavigationRequest.rejected, (state, action)=>{
-        state.errorInNavigation= action.payload
-    }),
-    builder.addCase(singleNavigationRequest.rejected, (state, action)=>{
-        state.errorInNavigation= action.payload
-    }),
-    builder.addCase(deleteNavigationRequest.rejected, (state, action)=>{
-        state.errorInNavigation= action.payload
-    })
-}
+    , extraReducers: (builder) => {
+        builder.addCase(getAllNavigationRequest.rejected, (state, action) => {
+            state.errorInNavigation = action.payload
+        }),
+            builder.addCase(addNewNavigationRequest.rejected, (state, action) => {
+                state.errorInNavigation = action.payload
+            }), builder.addCase(updateNavigationRequest.rejected, (state, action) => {
+                state.errorInNavigation = action.payload
+            }),
+            builder.addCase(singleNavigationRequest.rejected, (state, action) => {
+                state.errorInNavigation = action.payload
+            }),
+            builder.addCase(deleteNavigationRequest.rejected, (state, action) => {
+                state.errorInNavigation = action.payload
+            })
+    }
 })
 
 
-export const { setAllNavigation,setSingleNavigation, clearError } = navigationSlice.actions
+export const { setAllNavigation, setSingleNavigation, clearError } = navigationSlice.actions
 
 export default navigationSlice.reducer

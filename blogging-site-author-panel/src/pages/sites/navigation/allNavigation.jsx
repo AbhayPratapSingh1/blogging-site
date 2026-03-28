@@ -8,6 +8,8 @@ import AddNew from "../../../Components/common/addNew";
 
 
 export default function AllNavigation() {
+
+    
     const navData = useSelector(store => store.navigation.allNavigations)
     const dispatch = useDispatch()
     const { siteId } = useParams()
@@ -20,6 +22,7 @@ export default function AllNavigation() {
         name: "Add",
         link: `/sites/${siteId}/navigation/add-new`
     }
+    
     return (
         <div className='p-10 bg-gray-100 h-full' >
             <div className="flex">

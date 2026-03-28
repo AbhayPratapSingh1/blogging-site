@@ -476,11 +476,6 @@ export const pageMetaData = {
 };
 
 
-export const staticPageLinks = [
-  { name: "About", link: "/about" },
-  { name: "Privacy Policy", link: "/privacy" },
-  { name: "Contact Us", link: "/contact-us" },
-]
 
 export const staticPages = {
   "about": {

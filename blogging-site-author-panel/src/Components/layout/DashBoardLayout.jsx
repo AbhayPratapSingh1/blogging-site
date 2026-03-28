@@ -52,18 +52,18 @@ function DashBoardLayout({ children, title }) {
     }
   }, [navigate, dispatch, isAuthenticated]);
 
+  const handlerHeaderClick = () => {
+    dispatch(toggleMultiSelectMenu(false));
+  };
+
   if (isAuthenticated && headerFixed) {
     return (
       <div className="flex">
         <Sidebar onClick={() => dispatch(toggleMultiSelectMenu(false))} />
 
         <div className="border flex flex-col w-full z-40">
-          <Header
-            onClick={() => {
-              dispatch(toggleMultiSelectMenu(false));
-            }}
-            title={title}
-          />
+          {/* <Header onClick={handlerHeaderClick} title={title} /> */}
+          <Header title={title} />
           {children}
         </div>
       </div>
