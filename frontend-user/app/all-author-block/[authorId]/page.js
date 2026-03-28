@@ -1,22 +1,17 @@
+import CategoryPost from "@/app/Components/mainComponents/categoryPost";
+import { getAllCategories, getBlogsByAuthorId } from "@/app/serverCalls"
 
-export async function getBlogsByAuthor(id){
-    console.log(id);
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}/get-all-by-author/${id}`);
-    const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-all-by-author/${id}`, {
-        next: { tags: ['blogs'] },
-        headers: {
-            encodedes: process.env.NEXT_PUBLIC_SITE_NAME
-        }
-    })
-    console.log(data);
-    return data
-}
+export default async function Page({ params }) {
 
-export default async function Page({params}){
-    console.log(params.authorId);
-    const data = await getBlogsByAuthor(params.authorId)
-    // console.log(data);
+    const { authorId } = await params
+    const blogs = await getBlogsByAuthorId(authorId)
+    const categories = await getAllCategories();
+
     return (
-        <div className="">THis is the authors blogs</div>
+        <div className="">
+            <div> POSTS BY AUTHOR : "" || UPDATE THIS IN THE FUTURE</div>
+            <CategoryPost blogs={blogs} categories={categories} />
+        </div>
     )
 }
+

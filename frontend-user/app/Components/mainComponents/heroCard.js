@@ -1,5 +1,3 @@
-
-
 import { HeroPostDetail, HeroPostImage } from "./HeroCard/HeroBlogBlocks";
 
 const HeroCard = ({ data }) => {

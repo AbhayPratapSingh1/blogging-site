@@ -3,14 +3,17 @@ import Link from "next/link";
 import { capitalise, httpsToHttp } from "../../helper";
 import { formatDate } from "../../helper";
 
-export const FeaturedPostPostGrid = ({ data }) => {
+export const FeaturedPostPostGrid = ({ blogs }) => {
+    if (blogs.length === 0) {
+        return
+    }
     return (
         <div className="p-1 lg:p-2 md:grid lg:grid-cols-2 w-full overflow-hidden">
             {/* main feature card */}
-            <MainHeroPost item={data[0]} />
+            <MainHeroPost item={blogs[0]} />
             <div className="grid sm:grid-cols-2 justify-center w-full lg:h-[700px] gap-1" >
                 {/* Troverse each side card one by one */}
-                {data && data.length >= 4 && data.slice(1, 5).map((each, key) => {
+                {blogs && blogs.length >= 4 && blogs.slice(1, 5).map((each, key) => {
                     return (
                         // calling the function to return the card 
                         <CardPost item={each} key={key} />

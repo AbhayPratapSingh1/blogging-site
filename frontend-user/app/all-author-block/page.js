@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { getWriters } from "../page"
-import { capitalise, formatDate, httpsToHttp } from "../Components/helper";
+import { formatDate } from "../Components/helper";
 import Link from "next/link";
+import { getAllAuthors } from "../serverCalls";
 
 export default async function AuthorBlock() {
-    const authors = await getWriters()
+    const authors = await getAllAuthors()
     return (
         <div className="flex flex-wrap justify-evenly gap-2 my-5 p-1 md:p-10">
             {authors && authors.length > 0 && authors.map((each, index) => {

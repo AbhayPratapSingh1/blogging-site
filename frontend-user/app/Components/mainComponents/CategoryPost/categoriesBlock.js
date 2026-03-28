@@ -7,7 +7,7 @@ export const PostBlogs = ({ blogs }) => {
 
     return (
         <div className="grid lg:grid-cols-3 gap-5 my-5">
-            {blogs && blogs.length > 0 && blogs.map((each, key) => {
+            {blogs && blogs.length > 0 && blogs.slice(0, 6).map((each, key) => {
                 return <div key={key} className="p-2 pb-4 bg-white w-full  rounded-2xl overflow-hidden flex flex-col justify-between lg:h-[400px]">
                     <div className="overflow-hidden m-2 lg:hover:m-0 lg:hover:h-[516px] hover:shadow-lg transition-all duration-300 rounded-xl lg:h-[280px]"><Image style={{ objectFit: "cover" }} className="w-full aspect-square" height={70} width={400} src={httpsToHttp(each.images.url)} alt={each.images.name} /></div>
                     <div className=" px-5">

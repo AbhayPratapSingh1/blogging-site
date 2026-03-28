@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { serveStatic } from "hono/deno"
 import { logger } from "hono/logger"
-import { blogs, categories, featuredPost, pageMetaData, writeres } from "./static.js";
+import { blogs, featuredBlog, pageMetaData, authors } from "./static.js";
 
 
 const SOCIAL_MEDIA = [
@@ -25,11 +25,27 @@ export const createApp = () => {
 
   app.get("/meta-data/home", (c) => c.json(pageMetaData.home))
 
-  app.get("/single-fetaured", (c) => c.json(featuredPost))
+  app.get("/single-fetaured", (c) => c.json(featuredBlog))
 
-  app.get("/all-writers", (c) => c.json(writeres))
-  app.get("/categories", (c) => c.json(categories))
+  app.get("/all-writers", (c) => c.json(authors))
+  app.get("/categories", (c) => {
+    const categories = [];
+    for (const blog of blogs) {
+      if (!(categories.includes(blog.category))) {
+        categories.push({ categoryName: blog.category })
+      }
+    }
+    console.log({ categories });
+
+    return c.json(categories)
+  })
   app.get("/blogs", (c) => c.json(blogs))
+
+  app.get("/get-blogs-by-author-id/:id", (c) => {
+    const { id } = c.req.param()
+    const posts = blogs.filter(({ author }) => author.authorId === id)
+    return c.json(posts)
+  })
 
   app.get("*", serveStatic({ root: "./public" }))
 

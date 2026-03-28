@@ -37,6 +37,9 @@ module.exports = {
       }, {
         protocol: 'http',
         hostname: 'api.dicebear.com'
+      }, {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org'
       },
 
 

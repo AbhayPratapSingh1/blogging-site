@@ -5,60 +5,25 @@ import CallToAction from "./Components/mainComponents/callToAction";
 import FeaturedPost from "./Components/mainComponents/featuredPost";
 import HeroCard from "./Components/mainComponents/heroCard";
 import AuthorBlock from "./Components/mainComponents/authorBlock";
+import { getAllAuthors, getAllCategories, getBlogs, getHeroPost } from "./serverCalls";
 
 
 
-export async function getFeaturedArray() {
-
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blogs`)
-  if (!res.ok) {
-    return []
-  }
-  return res.json()
-}
-
-export async function getSingleFeatured() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/single-fetaured`)
-  if (!res.ok) {
-    return {
-      category: "some", slug: "pg-1", images: { url: "/images/hero1.avif", name: "Cup " }, title: "A cup of coffe to start off the dat",
-      author: { name: "Rajesh Sharma", type: "Developer", url: "/images/download.jpeg", }, createdAt: new Date().getDate(), tags: " adsf, asdf,asdf"
-    }
-  }
-  return res.json()
-}
-
-export async function getWriters() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/all-writers`)
-  if (!res.ok) {
-    return []
-  }
-  return res.json()
-}
-
-export async function getPostCategories() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
-  if (!res.ok) {
-    return []
-  }
-  return res.json()
-}
 
 export default async function Home() {
-  const heroPost = await getSingleFeatured();
-  const authors = await getWriters();
+  const heroPost = await getHeroPost();
+  const authors = await getAllAuthors();
 
-  const category = await getPostCategories();
-  const featuredPosts = await getFeaturedArray();
+  const category = await getAllCategories();
+  const blogs = await getBlogs();
 
   return (
     <>
       <HeroCard data={heroPost} />
-      <CategoryPost categories={category} allPosts={featuredPosts} />
+      <CategoryPost categories={category} blogs={blogs} />
       <AuthorBlock authors={authors} />
-      <FeaturedPost data={featuredPosts} />
+      <FeaturedPost blogs={blogs} />
       <CallToAction />
-
     </>
   )
 }
