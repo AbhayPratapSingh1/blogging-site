@@ -1,79 +1,54 @@
 import { Hono } from "hono"
+import { cors } from "hono/cors"
 import { serveStatic } from "hono/deno"
 import { logger } from "hono/logger"
-import { blogsDetails, featuredBlog, pageMetaData, authors, staticPageLinks, staticPages, blogs } from "./static.js";
 
-
-const SOCIAL_MEDIA = [
-  { name: "facebook", link: "/" },
-  { name: "whatsapp", link: "/ws" },
-  { name: "linkedin", link: "/in" },
-  { name: "twitter", link: "/tw" },
-  { name: "instagram", link: "/ig" },
-]
+import { sign } from "hono/jwt"
+import { featuredBlog, authors, staticPageLinks } from "./static.js";
+import { handleLogo, handlePageMetaData, SOCIAL_MEDIA, handleAllBlogs, handleBlogByAuthorId, handleBlogByCategory, handleCategories, handleStaticPageBySlug, handlePageBySlug } from "./handlers.js"
 
 
 export const createApp = () => {
+  const secret = "123456789"
   const app = new Hono()
 
   app.use(logger())
-  app.get("/logo", (c) => c.json({ url: "https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" }))
+
+  app.use("/api/*", cors());
+
+  app.post("/api/login", async (c) => {
+    const { email, password } = await c.req.json()
+
+    const payload = {
+      sub: email,
+      iss: "Me",
+      expiresIn: Date.now() + (5 * 1000)
+    }
+    const token = await sign(payload, secret)
+    return c.json({ accessToken: token })
+  })
+
+
+  app.get("/logo", handleLogo)
+  app.get("/meta-data/:page", handlePageMetaData)
 
   app.get("/get-navigation", (c) => c.json(staticPageLinks))
-  app.get("/static-page/:slug", (c) => {
-    const { slug } = c.req.param();
-
-    if (slug in staticPages) {
-      return c.json(staticPages[slug])
-    }
-
-    return c.body("Not Found", 404);
-  })
   app.get("/get-social-media", (c) => c.json(SOCIAL_MEDIA))
 
-  app.get("/meta-data/:page", (c) => {
-    const { page } = c.req.param();
-    if (page in pageMetaData) {
-      return c.json(pageMetaData[page])
-    }
-    return c.body("Not Fount", 404);
-  })
-
+  app.get("/blogs", handleAllBlogs)
   app.get("/single-fetaured", (c) => c.json(featuredBlog))
+  app.get("/get-blogs-by-author-id/:id", handleBlogByAuthorId)
+  app.get("/blogs-by-category/:category", handleBlogByCategory)
 
+
+  app.get("/categories", handleCategories)
   app.get("/all-writers", (c) => c.json(authors))
-  app.get("/categories", (c) => {
-    const categories = [];
-    for (const blog of blogsDetails) {
-      if (!(categories.includes(blog.category))) {
-        categories.push({ categoryName: blog.category })
-      }
-    }
-    return c.json(categories)
-  })
-  app.get("/blogs", (c) => c.json(blogsDetails))
-
-  app.get("/get-blogs-by-author-id/:id", (c) => {
-    const { id } = c.req.param()
-    const posts = blogsDetails.filter(({ author }) => author.authorId === id)
-    return c.json(posts)
-  })
 
 
-  app.get("/blogs-by-category/:category", (c) => {
-    const { category } = c.req.param()
-    const selectedBlogs = blogsDetails.filter(({ category: cat }) => cat.toLowerCase() === category.toLowerCase());
-    return c.json(selectedBlogs)
-  })
+  app.get("/static-page/:slug", handleStaticPageBySlug)
+  app.get("/page-by-slug/:slug", handlePageBySlug)
 
-  app.get("/page-by-slug/:slug", (c) => {
-    const { slug } = c.req.param()
 
-    if (slug in blogs) {
-      return c.json(blogs[slug]);
-    }
-    return c.body("Not Found", 403);
-  })
   app.get("*", serveStatic({ root: "./public" }))
 
   return app;

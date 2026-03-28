@@ -1,0 +1,80 @@
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setAuthorizationToken } from "./../../utils/setAuthorizationHeader";
+import { getuserRequest } from "./../../features/loginSlice";
+import {
+  setIsAuthenticated,
+  toggleMultiSelectMenu,
+  toggleProfileMenu,
+  toggleTableMenu,
+} from "../../features/appSlice";
+
+function DashBoardLayout({ children, title }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const isAuthenticated = useSelector((store) => store.app.isAuthenticated);
+  const user = useSelector((state) => state.login.user);
+
+  const [headerFixed, setHeaderFixed] = useState(false);
+
+  const handleInvalidToken = () => {
+    localStorage.clear();
+    dispatch(setIsAuthenticated(false));
+    setAuthorizationToken(false);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("abToken");
+    if (!token) {
+      handleInvalidToken();
+      return;
+    }
+
+    const tokenData = jwtDecode(token);
+
+    if (tokenData.expiresIn && tokenData.expiresIn < Date.now()) {
+      handleInvalidToken();
+    }
+
+    setAuthorizationToken(token);
+    setHeaderFixed(true);
+    dispatch(setIsAuthenticated(true));
+
+    if (!user._id) {
+      dispatch(getuserRequest());
+    }
+  }, [navigate, dispatch, isAuthenticated]);
+
+  if (isAuthenticated && headerFixed) {
+    return (
+      <div className="flex">
+        <Sidebar onClick={() => dispatch(toggleMultiSelectMenu(false))} />
+
+        <div className="border flex flex-col w-full z-40">
+          <Header
+            onClick={() => {
+              dispatch(toggleMultiSelectMenu(false));
+            }}
+            title={title}
+          />
+          {children}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="w-full h-full text-3xl flex justify-center items-center">
+        Loading.... please Wait
+      </div>
+    );
+  }
+}
+
+export default DashBoardLayout;

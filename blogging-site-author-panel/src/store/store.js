@@ -1,0 +1,26 @@
+import { configureStore } from '@reduxjs/toolkit'
+import appReducer from "../features/appSlice"
+import loginReducer from "../features/loginSlice"
+import blogReducer from "../features/blogSlice"
+import authorReducer from '../features/authorSlice'
+import categoryReducer from '../features/categorySlice'
+import staticPagesReducer from '../features/staticPagesSlice'
+import navigationSlice from '../features/navigationSlice'
+import tagsSlice from '../features/tagsSlice'
+import socialMediaReducer from '../features/socialMediaSlice'
+import siteReducer from '../features/siteSlice'
+
+export const store = configureStore({
+  reducer: {
+    app: appReducer,
+    login:loginReducer,
+    blogs:blogReducer,
+    author:authorReducer,
+    category:categoryReducer,
+    staticPages:staticPagesReducer,
+    navigation:navigationSlice,
+    tags:tagsSlice,
+    socialMedia:socialMediaReducer,
+    sites:siteReducer
+  },
+})
