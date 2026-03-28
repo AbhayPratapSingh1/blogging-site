@@ -40,7 +40,9 @@ export const authors = [
     updatedAt: 1711639978000,
     profilePic: { url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Bill" }
   }
-]; export const featuredBlog = {
+];
+
+export const featuredBlog = {
   _id: "feat-101",
   category: "Gaming",
   slug: "evolution-of-kanto",
@@ -60,7 +62,221 @@ export const authors = [
   tags: "pokemon, nintendo, retro-gaming"
 }
 
-export const blogs = [
+export const blogs = {
+  "evolution-of-kanto": {
+    _id: "feat-101",
+    category: "Gaming",
+    slug: "evolution-of-kanto",
+    author: {
+      authorId: "auth-001",
+      name: "Ash Ketchum",
+      type: "Pokémon Master",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Ash"
+    },
+    tags: "pokemon, nintendo, retro-gaming",
+    createdAt: 1711639978000,
+    images: {
+      name: "Dragonite",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png"
+    },
+    title: "The Ultimate Guide to Dragon-Type Mastery",
+    description: `
+    <h2>Unleashing the Dragon</h2>
+    <p>When it comes to the Kanto region, there isn't a Pokémon that commands respect quite like Dragonite. It’s not just about the raw power; it’s about the bond you build during those long hours of training!</p>
+    
+    <h3>Why Dragonite Rules the Skies</h3>
+    <ul>
+      <li><strong>Extreme Speed:</strong> It can fly around the globe in just 16 hours.</li>
+      <li><strong>Versatile Movepool:</strong> From Hyper Beam to Dragon Claw, it handles any threat.</li>
+      <li><strong>Inner Focus:</strong> A true champion never flinches in the heat of battle!</li>
+    </ul>
+    
+    <p>Training a Dratini all the way to its final form takes patience, but seeing that orange wingspan for the first time makes every battle worth it. Let’s get out there and become Masters!</p>
+  `
+  },
+  "mewtwo-strikes-back": {
+    _id: "blog-001",
+    category: "Legendary",
+    slug: "mewtwo-strikes-back",
+    author: {
+      authorId: "auth-002",
+      name: "Professor Oak",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"
+    },
+    tags: "Psychic, Kanto, Legendary-Research",
+    createdAt: 1711639978000,
+    images: {
+      name: "Mewtwo Artwork",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png"
+    },
+    title: "Understanding the Genetic Power of Mewtwo",
+    description: `
+      <h2>The Ethics of Cloning</h2>
+      <p>Mewtwo remains the most ambitious and controversial project in the history of Pokémon biology. Created from the DNA of Mew, this entity was designed to surpass its predecessor in every measurable way.</p>
+      <h3>Biological Superiority</h3>
+      <ul>
+        <li>Psychic output exceeding 10,000 gigajoules.</li>
+        <li>Rapid cellular regeneration capabilities.</li>
+        <li>Enhanced cognitive processing beyond human levels.</li>
+      </ul>
+      <p>However, the question remains: does power define a Pokémon, or is it the heart of the trainer?</p>
+    `
+  },
+  "choosing-your-first-partner": {
+    _id: "blog-002",
+    category: "Starters",
+    slug: "choosing-your-first-partner",
+    author: {
+      authorId: "auth-003",
+      name: "Nurse Joy",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Joy"
+    },
+    tags: "Fire, Water, Grass, Beginner-Guide",
+    createdAt: 1711639978000,
+    images: {
+      name: "Kanto Starters",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
+    },
+    title: "Fire, Water, or Grass: Who Should You Choose?",
+    description: `
+      <h2>A Guide for New Trainers</h2>
+      <p>Walking into Professor Oak's lab is a moment you'll never forget. But which Pokéball contains your perfect match?</p>
+      <h3>The Triangle of Elements</h3>
+      <p><strong>Bulbasaur:</strong> Perfect for those who value defense and status-altering moves early on. <strong>Charmander:</strong> For the bold trainer who wants high offensive power. <strong>Squirtle:</strong> The balanced choice for tactical versatility.</p>
+      <p>Remember, your first partner isn't just a tool for battle—they are your lifelong friend.</p>
+    `
+  },
+  "haunted-lavender-town": {
+    _id: "blog-003",
+    category: "Ghost Type",
+    slug: "haunted-lavender-town",
+    author: {
+      authorId: "auth-004",
+      name: "Gary Oak",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Gary"
+    },
+    tags: "Ghost, Horror, Lavender-Town",
+    createdAt: 1711639978000,
+    images: {
+      name: "Gengar Shadow",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png"
+    },
+    title: "The Mysteries of the Lavender Town Radio Tower",
+    description: `
+      <h2>The Haunting Frequencies</h2>
+      <p>Don't bother listening to the rumors—listen to the facts. The Lavender Town Radio Tower is built on the site of the original Pokémon Tower, and the energy there is... off.</p>
+      <h3>Investigative Findings</h3>
+      <p>During my visit, we recorded strange white noise on Channel 20.5. Whether it's the Ghost-types or something more structural, trainers should keep their Silph Scopes ready at all times.</p>
+      <p>I didn't see any ghosts, but my Eevee certainly didn't like the basement.</p>
+    `
+  },
+  "eevee-evolution-guide": {
+    _id: "blog-004",
+    category: "Evolution",
+    slug: "eevee-evolution-guide",
+    author: {
+      authorId: "auth-005",
+      name: "Bill the PC Guy",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Bill"
+    },
+    tags: "Eevee, Evolution, Elemental-Stones",
+    createdAt: 1711639978000,
+    images: {
+      name: "Eevee Family",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"
+    },
+    title: "How to Evolve Your Eevee into Eight Different Types",
+    description: `
+      <h2>The Irregular Genetic Code</h2>
+      <p>Eevee is a marvel of nature. Its DNA is uniquely unstable, allowing it to mutate based on environmental factors or specific catalysts.</p>
+      <h3>Known Evolutionary Paths</h3>
+      <ul>
+        <li><strong>Stones:</strong> Fire, Water, and Thunder Stones provide instant evolution.</li>
+        <li><strong>Bonding:</strong> Friendship levels during day or night cycles trigger Espeon or Umbreon.</li>
+        <li><strong>Environment:</strong> Mossy or Icy rocks influence Leafeon and Glaceon.</li>
+      </ul>
+      <p>Which "Eeveelution" suits your team's strategy best? It all depends on the gaps in your roster.</p>
+    `
+  },
+  "ancient-ruins-of-alph": {
+    _id: "blog-005",
+    category: "History",
+    slug: "ancient-ruins-of-alph",
+    author: {
+      authorId: "auth-002",
+      name: "Professor Oak",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"
+    },
+    tags: "Unown, Johto, Archaeology",
+    createdAt: 1711641200000,
+    images: {
+      name: "Unown Symbols",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"
+    },
+    title: "Deciphering the Secrets of the Ruins of Alph",
+    description: `
+      <h2>A Language Lost to Time</h2>
+      <p>The Ruins of Alph represent one of the greatest archaeological puzzles in Johto. The walls are covered in Unown—Pokémon that literally resemble an ancient alphabet.</p>
+      <h3>Research Highlights</h3>
+      <p>Are the Unown symbols based on human writing, or did humans learn to write by imitating the Unown? My latest research suggests a symbiotic relationship that dates back thousands of years.</p>
+      <p>Unlocking the sliding stone puzzles is the only way to reveal the chamber's true purpose.</p>
+    `
+  },
+  "gym-leader-strategies": {
+    _id: "blog-006",
+    category: "Competitive",
+    slug: "gym-leader-strategies",
+    author: {
+      authorId: "auth-004",
+      name: "Gary Oak",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Gary"
+    },
+    tags: "Badges, Strategy, Elite-Four",
+    createdAt: 1711642500000,
+    images: {
+      name: "Blastoise Might",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"
+    },
+    title: "Why Most Trainers Fail at the Third Gym",
+    description: `
+      <h2>The Lt. Surge Wall</h2>
+      <p>I see it all the time: trainers breeze through Brock and Misty and then get completely shocked—literally—by Lt. Surge. Why? Because they don't understand speed tiers.</p>
+      <h3>The Winning Formula</h3>
+      <ol>
+        <li>Bring a Ground-type (obviously).</li>
+        <li>Identify the "Double Team" spam early.</li>
+        <li>Don't be afraid to switch out paralyzed Pokémon immediately.</li>
+      </ol>
+      <p>If you can't handle a Raichu, you have no business challenging the Elite Four. Smell ya later!</p>
+    `
+  },
+  "fastest-kanto-clear": {
+    _id: "blog-007",
+    category: "Speedrunning",
+    slug: "fastest-kanto-clear",
+    author: {
+      authorId: "auth-001",
+      name: "Ash Ketchum",
+      url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Ash"
+    },
+    tags: "Speedrun, Glitches, Records",
+    createdAt: 1711643800000,
+    images: {
+      name: "Arcanine Speed",
+      url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png"
+    },
+    title: "Breaking the 2-Hour Barrier in Kanto",
+    description: `
+      <h2>Maximum Velocity</h2>
+      <p>When you're aiming for a world record, every frame counts. Forget catching 'em all; we're catching only what we need to reach the Hall of Fame.</p>
+      <h3>Key Speedrun Tactics</h3>
+      <p>Using Nidoking for its diverse movepool and abusing the 'X-Accuracy' and 'Horn Drill' combo is a staple of the Kanto Any% route. We also use specific menu-buffering to avoid wild encounters.</p>
+      <p>It’s a grueling pace, but seeing that timer stop under 1:50:00 is the ultimate rush!</p>
+    `
+  }
+};
+
+export const blogsDetails = [
   {
     _id: "blog-001",
     category: "Legendary",

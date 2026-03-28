@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { serveStatic } from "hono/deno"
 import { logger } from "hono/logger"
-import { blogs, featuredBlog, pageMetaData, authors, staticPageLinks, staticPages } from "./static.js";
+import { blogsDetails, featuredBlog, pageMetaData, authors, staticPageLinks, staticPages, blogs } from "./static.js";
 
 
 const SOCIAL_MEDIA = [
@@ -36,7 +36,6 @@ export const createApp = () => {
     if (page in pageMetaData) {
       return c.json(pageMetaData[page])
     }
-    console.log("Not in the ");
     return c.body("Not Fount", 404);
   })
 
@@ -45,21 +44,36 @@ export const createApp = () => {
   app.get("/all-writers", (c) => c.json(authors))
   app.get("/categories", (c) => {
     const categories = [];
-    for (const blog of blogs) {
+    for (const blog of blogsDetails) {
       if (!(categories.includes(blog.category))) {
         categories.push({ categoryName: blog.category })
       }
     }
     return c.json(categories)
   })
-  app.get("/blogs", (c) => c.json(blogs))
+  app.get("/blogs", (c) => c.json(blogsDetails))
 
   app.get("/get-blogs-by-author-id/:id", (c) => {
     const { id } = c.req.param()
-    const posts = blogs.filter(({ author }) => author.authorId === id)
+    const posts = blogsDetails.filter(({ author }) => author.authorId === id)
     return c.json(posts)
   })
 
+
+  app.get("/blogs-by-category/:category", (c) => {
+    const { category } = c.req.param()
+    const selectedBlogs = blogsDetails.filter(({ category: cat }) => cat.toLowerCase() === category.toLowerCase());
+    return c.json(selectedBlogs)
+  })
+
+  app.get("/page-by-slug/:slug", (c) => {
+    const { slug } = c.req.param()
+
+    if (slug in blogs) {
+      return c.json(blogs[slug]);
+    }
+    return c.body("Not Found", 403);
+  })
   app.get("*", serveStatic({ root: "./public" }))
 
   return app;

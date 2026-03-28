@@ -2,6 +2,7 @@ export const APIS = {
   LOGO: "/logo",
 
   META_DATA: "/meta-data",
+  META_DATA_BY_CATEGORY: "/meta-data",
 
   NAVIGATIONS: "/get-navigation",
   SOCIAL_MEDIA: "/get-social-media",
@@ -12,6 +13,7 @@ export const APIS = {
   CATEGORIES: "/categories",
   AUTHOR_BLOGS: "/get-blogs-by-author-id",
   STATIC_PAGES: "/static-page",
+  BLOGS_BY_CATEGORY: "/blogs-by-category",
 }
 
 const handleRequest = async (path) => {
@@ -120,6 +122,23 @@ export const getStaticPage = async (slug) => {
   const res = await handleRequest(`${APIS.STATIC_PAGES}/${slug}`)
   if (!res.ok) {
     return {}
+  }
+  return res.json()
+
+}
+
+export const getBlogsByCategory = async (category) => {
+  const res = await handleRequest(`${APIS.BLOGS_BY_CATEGORY}/${category}`)
+  if (!res.ok) {
+    return []
+  }
+  return res.json()
+}
+
+export const getMetaDataByCategory = async (category) => {
+  const res = await handleRequest(`${APIS.META_DATA_BY_CATEGORY}/${category}`)
+  if (!res.ok) {
+    return []
   }
   return res.json()
 

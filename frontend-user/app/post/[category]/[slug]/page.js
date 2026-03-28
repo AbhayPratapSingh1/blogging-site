@@ -2,20 +2,19 @@ import React from 'react'
 import { capitalise, formatDate, httpsToHttp, paragraphLength } from '../../../Components/helper'
 import RenderHtml from '../../../Components/commonToAll/renderHtml'
 import Image from "next/image"
+import { getAllPosts } from '../page'
+import { PostBlogs } from '@/app/Components/mainComponents/CategoryPost/categoriesBlock'
+import { getBlogs } from '@/app/serverCalls'
 
 async function getSinglePost(slug) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/page-by-slug/${slug}`, {
-        next: { tags: ['posts'] },
-        headers: {
-            encodedes: process.env.NEXT_PUBLIC_SITE_NAME
-        }
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/page-by-slug/${slug}`)
     return res.json()
 }
 
 
 export async function generateMetadata({ params }) {
-    const post = await getSinglePost(params.slug)
+    const { slug } = await params
+    const post = await getSinglePost(slug)
     return {
         title: capitalise(post.metaTitle),
         keywords: post.metaKeywords,
@@ -36,21 +35,34 @@ export async function generateMetadata({ params }) {
 
 
 
-export async function generateStaticParams() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages-all`, {
-        next: { tags: ['posts'] },
+// export async function generateStaticParams() {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages-all`, {
+//         next: { tags: ['posts'] },
 
-        headers: {
-            encodedes: process.env.NEXT_PUBLIC_SITE_NAME
-        }
-    })
-    return res.json()
+//         headers: {
+//             encodedes: process.env.NEXT_PUBLIC_SITE_NAME
+//         }
+//     })
+//     return res.json()
+// }
+
+
+
+
+const AuthorBlock = ({ post }) => {
+    return <div className='order-1 max-w-xl m-auto flex items-center py-2'>
+        <div className="shrink-0 overflow-hidden mr-2 inline-block h-16 w-16 rounded-full bg-gray-300"><Image typeof={post?.images?.type} style={{ objectFit: "cover" }} height={100} width={100} src={post?.author?.url} alt={post?.author?.name} /></div>
+        <div className='flex flex-col justify-start'>
+            <p className='text-sm sm:text-lg'>{capitalise(post?.author?.name)}</p>
+            <div className='flex gap-5 justify-center text-[10px] sm:text-[12px]'>
+                <p className='text-center '>{formatDate(post.createdAt)}</p>
+                <p className='text-center '>{Math.floor(paragraphLength(post.description) / 130)} min</p>
+            </div>
+        </div>
+    </div>
 }
 
-
-
-
-const ImageBar = ({ post }) => {
+const Details = ({ post }) => {
     return (
         <div className='flex flex-col p-2'>
             {/* tags ,  heading and description block */}
@@ -62,19 +74,10 @@ const ImageBar = ({ post }) => {
                     )
                 })}
             </div>
-            {/* author block */}
-            <div className='order-1 max-w-xl m-auto flex items-center py-2'>
-                <div className="shrink-0 overflow-hidden mr-2 inline-block h-16 w-16 rounded-full bg-gray-300" ><Image typeof={post?.images?.type} style={{ objectFit: "cover" }} height={100} width={100} src={post?.author?.url} alt={post?.author?.name} /></div>
-                <div className='flex flex-col justify-start'>
-                    <p className='text-sm sm:text-lg'>{capitalise(post?.author?.name)}</p>
-                    <div className='flex gap-5 justify-center text-[10px] sm:text-[12px]'>
-                        <p className='text-center '>{formatDate(post.createdAt)}</p>
-                        <p className='text-center '>{Math.floor(paragraphLength(post.description) / 130)} min</p>
-                    </div>
-                </div>
-            </div>
+
+            <AuthorBlock post={post} />
             {/* image block */}
-            <div className="order-2 h-full w-full max-h-96 overflow-hidden bg-gray-300" >
+            <div className="order-2 h-full w-full overflow-hidden bg-gray-300" >
                 <Image className='h-full w-full' typeof={post?.images?.type} style={{ objectFit: "contain" }} height={800} width={800} src={httpsToHttp(post?.images?.url)} alt={capitalise(post?.author?.name)} />
             </div>
         </div>
@@ -84,15 +87,16 @@ const ImageBar = ({ post }) => {
 
 //   main function
 export default async function SlugPages({ params }) {
-    const post = await getSinglePost(params.slug)
+
+    const { slug } = await params
+    const post = await getSinglePost(slug)
+    const otherPost = await getBlogs()
     return (
         <div className='max-w-5xl m-auto py-10'>
-            {/* Component to display Image props post => image , title , minute read , date  */}
-            <ImageBar post={post} />
-            {/* Component about Author */}
 
-            {/* Component which return html  */}
+            <Details post={post} />
             <RenderHtml html={post.description} />
+            <PostBlogs blogs={otherPost} />
         </div>
     )
 }
