@@ -1,10 +1,13 @@
 import { getHomePagePosts } from "../page";
+import { getBlogs } from "../serverCalls";
 import Search from "./Components/serchClientSide";
 
 
-export default async function getData(){
-    const Blogs = await getHomePagePosts()
-    return <Search Blogs={Blogs}/>
+export default async function getData() {
+    const blogs = await getBlogs()
+    console.log({ blogs });
+
+    return <Search blogs={blogs} />
 }
 
 

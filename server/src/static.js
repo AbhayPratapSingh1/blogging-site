@@ -40,9 +40,7 @@ export const authors = [
     updatedAt: 1711639978000,
     profilePic: { url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Bill" }
   }
-];
-
-export const featuredBlog = {
+]; export const featuredBlog = {
   _id: "feat-101",
   category: "Gaming",
   slug: "evolution-of-kanto",
@@ -51,6 +49,7 @@ export const featuredBlog = {
     name: "Dragonite"
   },
   title: "The Ultimate Guide to Dragon-Type Mastery",
+  description: "Join Ash Ketchum as he breaks down the training secrets and sheer power behind the Kanto region's most iconic Dragon-type, Dragonite.",
   author: {
     authorId: "auth-001",
     name: "Ash Ketchum",
@@ -67,7 +66,7 @@ export const blogs = [
     category: "Legendary",
     slug: "mewtwo-strikes-back",
     author: {
-      authorId: "auth-002", // Moved here
+      authorId: "auth-002",
       name: "Professor Oak",
       url: "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"
     },
@@ -77,7 +76,8 @@ export const blogs = [
       name: "Mewtwo Artwork",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png"
     },
-    title: "Understanding the Genetic Power of Mewtwo"
+    title: "Understanding the Genetic Power of Mewtwo",
+    description: "Professor Oak explores the ethical and biological implications of the world's most powerful man-made Pokémon."
   },
   {
     _id: "blog-002",
@@ -94,7 +94,8 @@ export const blogs = [
       name: "Kanto Starters",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"
     },
-    title: "Fire, Water, or Grass: Who Should You Choose?"
+    title: "Fire, Water, or Grass: Who Should You Choose?",
+    description: "A kind-hearted guide for new trainers on selecting the partner that best fits their personality and journey style."
   },
   {
     _id: "blog-003",
@@ -111,7 +112,8 @@ export const blogs = [
       name: "Gengar Shadow",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png"
     },
-    title: "The Mysteries of the Lavender Town Radio Tower"
+    title: "The Mysteries of the Lavender Town Radio Tower",
+    description: "Gary Oak investigates the chilling urban legends and spectral sightings surrounding the tower of spirits."
   },
   {
     _id: "blog-004",
@@ -128,7 +130,8 @@ export const blogs = [
       name: "Eevee Family",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"
     },
-    title: "How to Evolve Your Eevee into Eight Different Types"
+    title: "How to Evolve Your Eevee into Eight Different Types",
+    description: "Master of the PC system and Pokémon researcher Bill explains the complex genetic triggers behind Eevee's many forms."
   },
   {
     _id: "blog-005",
@@ -145,7 +148,8 @@ export const blogs = [
       name: "Unown Symbols",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"
     },
-    title: "Deciphering the Secrets of the Ruins of Alph"
+    title: "Deciphering the Secrets of the Ruins of Alph",
+    description: "An archaeological deep-dive into the strange Unown symbols and their connection to the Johto region's past."
   },
   {
     _id: "blog-006",
@@ -162,7 +166,8 @@ export const blogs = [
       name: "Blastoise Might",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"
     },
-    title: "Why Most Trainers Fail at the Third Gym"
+    title: "Why Most Trainers Fail at the Third Gym",
+    description: "Think you're ready for Lt. Surge? Gary Oak breaks down why amateur strategies fail and how to win like a champion."
   },
   {
     _id: "blog-007",
@@ -179,7 +184,8 @@ export const blogs = [
       name: "Arcanine Speed",
       url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png"
     },
-    title: "Breaking the 2-Hour Barrier in Kanto"
+    title: "Breaking the 2-Hour Barrier in Kanto",
+    description: "Optimization is key. Learn the route and glitches used to clear the original Kanto journey in record-shattering time."
   }
 ];
 
