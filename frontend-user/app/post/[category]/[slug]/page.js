@@ -13,40 +13,23 @@ async function getSinglePost(slug) {
 
 
 export async function generateMetadata({ params }) {
-    const { slug } = await params
+    const { slug, category } = await params
     const post = await getSinglePost(slug)
+    console.log({ post });
+
     return {
-        title: capitalise(post.metaTitle),
-        keywords: post.metaKeywords,
-        description: post.metaDescription,
+        title: capitalise(post.metadata.title),
+        keywords: post.metadata.keywords,
+        description: post.metadata.description,
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${params.category}/${params.slug}`,
+            canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${category}/${slug}`,
         },
         openGraph: {
             locale: "en_IN",
             type: "website",
-            images: [`http://localhost:3000/api/og?title=${encodeURI(capitalise(post.title))}`, { size: { width: 512, height: 512 }, alt: `${post.title}` }]
         },
     }
 }
-
-
-
-
-
-
-// export async function generateStaticParams() {
-//     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/pages-all`, {
-//         next: { tags: ['posts'] },
-
-//         headers: {
-//             encodedes: process.env.NEXT_PUBLIC_SITE_NAME
-//         }
-//     })
-//     return res.json()
-// }
-
-
 
 
 const AuthorBlock = ({ post }) => {

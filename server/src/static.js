@@ -67,6 +67,11 @@ export const blogs = {
     _id: "feat-101",
     category: "Gaming",
     slug: "evolution-of-kanto",
+    metadata: {
+      title: "Evolution Of Kanto",
+      keywords: "Dragonite, Dragon-type mastery, Kanto Pokemon, Ash Ketchum training",
+      description: "Join Ash Ketchum as he breaks down the training secrets and sheer power behind the Kanto region's most iconic Dragon-type, Dragonite.",
+    },
     author: {
       authorId: "auth-001",
       name: "Ash Ketchum",
@@ -83,14 +88,12 @@ export const blogs = {
     description: `
     <h2>Unleashing the Dragon</h2>
     <p>When it comes to the Kanto region, there isn't a Pokémon that commands respect quite like Dragonite. It’s not just about the raw power; it’s about the bond you build during those long hours of training!</p>
-    
     <h3>Why Dragonite Rules the Skies</h3>
     <ul>
       <li><strong>Extreme Speed:</strong> It can fly around the globe in just 16 hours.</li>
       <li><strong>Versatile Movepool:</strong> From Hyper Beam to Dragon Claw, it handles any threat.</li>
       <li><strong>Inner Focus:</strong> A true champion never flinches in the heat of battle!</li>
     </ul>
-    
     <p>Training a Dratini all the way to its final form takes patience, but seeing that orange wingspan for the first time makes every battle worth it. Let’s get out there and become Masters!</p>
   `
   },
@@ -98,6 +101,11 @@ export const blogs = {
     _id: "blog-001",
     category: "Legendary",
     slug: "mewtwo-strikes-back",
+    metadata: {
+      title: "Mewtwo Strikes Back",
+      keywords: "Mewtwo, Psychic Pokemon, Legendary Research, Pokemon Cloning, Professor Oak",
+      description: "Explore the biological superiority and ethical dilemmas behind the creation of Mewtwo, the world's strongest Psychic-type.",
+    },
     author: {
       authorId: "auth-002",
       name: "Professor Oak",
@@ -126,6 +134,11 @@ export const blogs = {
     _id: "blog-002",
     category: "Starters",
     slug: "choosing-your-first-partner",
+    metadata: {
+      title: "Choosing Your First Partner",
+      keywords: "Kanto Starters, Bulbasaur, Charmander, Squirtle, Pokemon Beginner Guide",
+      description: "A comprehensive guide for new trainers on selecting their first partner: Bulbasaur, Charmander, or Squirtle.",
+    },
     author: {
       authorId: "auth-003",
       name: "Nurse Joy",
@@ -150,6 +163,11 @@ export const blogs = {
     _id: "blog-003",
     category: "Ghost Type",
     slug: "haunted-lavender-town",
+    metadata: {
+      title: "Haunted Lavender Town",
+      keywords: "Lavender Town, Ghost Pokemon, Gengar, Pokemon Tower, Gary Oak research",
+      description: "Investigating the eerie frequencies and ghostly legends surrounding the Lavender Town Radio Tower.",
+    },
     author: {
       authorId: "auth-004",
       name: "Gary Oak",
@@ -174,6 +192,11 @@ export const blogs = {
     _id: "blog-004",
     category: "Evolution",
     slug: "eevee-evolution-guide",
+    metadata: {
+      title: "Eevee Evolution Guide",
+      keywords: "Eevee, Eeveelutions, Fire Stone, Water Stone, Thunder Stone, Espeon, Umbreon",
+      description: "Learn how to unlock all eight elemental evolutions for Eevee using stones, friendship, and environments.",
+    },
     author: {
       authorId: "auth-005",
       name: "Bill the PC Guy",
@@ -202,6 +225,11 @@ export const blogs = {
     _id: "blog-005",
     category: "History",
     slug: "ancient-ruins-of-alph",
+    metadata: {
+      title: "Ancient Ruins Of Alph",
+      keywords: "Ruins of Alph, Unown, Johto Archaeology, Pokemon History",
+      description: "Uncover the secrets of the Unown and the ancient archaeological puzzles of the Johto region.",
+    },
     author: {
       authorId: "auth-002",
       name: "Professor Oak",
@@ -226,6 +254,11 @@ export const blogs = {
     _id: "blog-006",
     category: "Competitive",
     slug: "gym-leader-strategies",
+    metadata: {
+      title: "Gym Leader Strategies",
+      keywords: "Lt. Surge strategy, Kanto Gym Leaders, Raichu battle, competitive pokemon tips",
+      description: "Expert advice on overcoming the difficult mid-game gym leaders and preparing for the Elite Four.",
+    },
     author: {
       authorId: "auth-004",
       name: "Gary Oak",
@@ -254,6 +287,11 @@ export const blogs = {
     _id: "blog-007",
     category: "Speedrunning",
     slug: "fastest-kanto-clear",
+    metadata: {
+      title: "Fastest Kanto Clear",
+      keywords: "Pokemon Speedrun, Kanto Any%, Nidoking route, Pokemon records",
+      description: "Master the tactics required to clear the Kanto region in record-breaking time.",
+    },
     author: {
       authorId: "auth-001",
       name: "Ash Ketchum",

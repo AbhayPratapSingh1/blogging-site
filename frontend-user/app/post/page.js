@@ -4,8 +4,7 @@ import { getBlogs } from "../serverCalls";
 
 export default async function Page() {
   const blogs = await getBlogs()
-
-
+  
   return (
     < div className='' >
       <h1 className=' text-center text-3xl sm:text-4xl lg:text-5xl p-4 font-semibold'>{capitalise(blogs[0]?.category)}</h1>
