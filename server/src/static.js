@@ -186,17 +186,88 @@ export const blogs = [
 export const pageMetaData = {
   home: {
     metaTitle: "Gotta Catch 'Em All | Ultimate Pokémon Strategy & News",
-    metaKeywords: "Pokémon; Pokedex; Gaming News; Nintendo Switch; Strategy Guide",
+    metaKeywords: "Pokémon, Pokedex, Gaming News, Nintendo Switch, Strategy Guide",
     metaDescription: "Your premier destination for the latest Pokémon battle strategies, regional guides, and breaking news from the world of Nintendo gaming.",
   },
-  blog: {
-    metaTitle: "The Trainer's Journal | Latest Articles & Tips",
-    metaKeywords: "Pokémon Blog; Game Reviews; Leveling Guide; Shiny Hunting",
-    metaDescription: "Deep dives into game mechanics, hidden secrets, and community stories from across the Pokémon universe.",
+  "about": {
+    title: "About Our Pokémon Research Journey",
+    excerpt: "Founded in Pallet Town, we are dedicated to documenting every species across the Kanto and Johto regions.",
+    publishedAt: "2024-03-28T10:00:00Z",
+    coverImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png" // Mew (Research Theme)
   },
-  contact: {
-    metaTitle: "Contact the Gym Leader | Get in Touch",
-    metaKeywords: "Support; Collaboration; Gaming Community; Inquiry",
-    metaDescription: "Have a tip or a question? Reach out to our team of experts and join the conversation today.",
+  "privacy": {
+    title: "Privacy Policy | Trainer Data Protection",
+    excerpt: "Your Trainer ID and location data are guarded as securely as a Master Ball. Learn about our encryption standards.",
+    publishedAt: "2024-03-28T10:00:00Z",
+    coverImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/101.png" // Electrode (Security Theme)
+  },
+  "contact-us": {
+    title: "Contact Us | Reach the Research Lab",
+    excerpt: "Have a question about an evolution or a gym leader strategy? Connect with our Professors via digital portal.",
+    publishedAt: "2024-03-28T10:00:00Z",
+    coverImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png" // Pidgey (Messenger Theme)
+  },
+  "blog": {
+    title: "The Trainer's Journal | Latest Articles & Tips",
+    excerpt: "Deep dives into game mechanics, hidden secrets, and community stories from across the Pokémon universe.",
+    publishedAt: "2024-03-28T10:00:00Z",
+    coverImage: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" // Pikachu
   }
 };
+
+
+export const staticPageLinks = [
+  { name: "About", link: "/about" },
+  { name: "Privacy Policy", link: "/privacy" },
+  { name: "Contact Us", link: "/contact-us" },
+]
+
+export const staticPages = {
+  "about": {
+    title: "About Us",
+    description: `
+      <section>
+        <h2>The Journey of a Pokémon Master</h2>
+        <p>Founded in <strong>Pallet Town</strong>, our mission is to provide the most comprehensive research and news across the Kanto and Johto regions.</p>
+        <p>Whether you're a beginner starting with your first partner or an Elite Four contender, we're here to help you catch 'em all. Our team of dedicated Professors works around the clock to document every species and battle strategy known to the Pokémon world.</p>
+        <ul>
+          <li>Expert Battle Strategies</li>
+          <li>Regional Pokedex Research</li>
+          <li>Gym Leader Guides</li>
+        </ul>
+      </section>
+    `,
+  },
+  "privacy": {
+    title: "Privacy Policy",
+    description: `
+      <section>
+        <h2>Your data is as safe as a Master Ball</h2>
+        <p>At our Research Lab, we take your privacy seriously. Your Trainer ID, location data, and party information are strictly confidential.</p>
+        <p>We ensure that:</p>
+        <ul>
+          <li>Your data is never shared with <strong>Team Rocket</strong> or third-party organizations.</li>
+          <li>End-to-end encryption is used on all Pokedex syncs.</li>
+          <li>You have full control over your profile visibility in the Global Trade System (GTS).</li>
+        </ul>
+        <p>By using our services, you agree to the Trainer Privacy Code of Conduct.</p>
+      </section>
+    `,
+  },
+  "contact-us": {
+    title: "Get in Touch",
+    description: `
+      <section>
+        <h2>Visit any Pokémon Center or message us here</h2>
+        <p>Have a question about a specific evolution or a bug in your PC storage system? Our help desk is open 24/7 across all major cities.</p>
+        <p><strong>Contact Methods:</strong></p>
+        <ul>
+          <li><strong>Pidgey Express:</strong> Send a letter to the Pallet Town Research Lab.</li>
+          <li><strong>Digital Portal:</strong> Use any PC in a Pokémon Center to reach our support team.</li>
+          <li><strong>Video Call:</strong> Available via the Xtransceiver for registered Trainers.</li>
+        </ul>
+        <p>We usually respond within one business day (unless we're currently in a Gym Battle).</p>
+      </section>
+    `,
+  }
+}

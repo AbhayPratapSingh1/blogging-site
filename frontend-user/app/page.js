@@ -13,7 +13,6 @@ import { getAllAuthors, getAllCategories, getBlogs, getHeroPost } from "./server
 export default async function Home() {
   const heroPost = await getHeroPost();
   const authors = await getAllAuthors();
-
   const category = await getAllCategories();
   const blogs = await getBlogs();
 

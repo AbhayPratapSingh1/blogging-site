@@ -1,14 +1,14 @@
 import React from 'react'
-import Image from 'next/image'
-import { httpsToHttp, formatDate, capitalise } from '../Components/helper'
-import Link from 'next/link'
+import { capitalise } from '../Components/helper'
 import RenderHtml from '../Components/commonToAll/renderHtml'
+import { getMetaData, getStaticPage } from '../serverCalls'
 
 
 
 export async function generateMetadata({ params }) {
-    // Fetch blog post data
-    const post = await fetchBlogPost(params.slug)
+
+    const { staticPage } = await params
+    const post = await getMetaData(staticPage)
 
     return {
         title: post.title,
@@ -23,39 +23,14 @@ export async function generateMetadata({ params }) {
     }
 }
 
-// export async function generateMetadata({ params }) {
-//     const data = await getStaticPage(params.category)
-//     return {
-//         title: capitalise(data.metaTitle),
-//         keywords: data.metaKeywords,
-//         description: data.metaDescription,
-//         alternates: {
-//             canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${params.page}`,
-//         },
-//         openGraph: {
-//             locale: "en_IN",
-//             type: "website",
-//             images: [`http://localhost:3000/api/og?title=${encodeURI(capitalise(data.page))}`, { size: { width: 512, height: 512 }, alt: `${data.slug}` }]
-//         },
-//     }
-// }
-
-
-export async function getStaticPage(slug) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/static-page-by-slug/${slug}`, {
-        next: { tags: ['header'] },
-        headers: {
-            encodedes: process.env.NEXT_PUBLIC_SITE_NAME
-        }
-    })
-    return res.json()
-}
 
 export default async function Page({ params }) {
-    const data = await getStaticPage(params.staticPage)
+    const { staticPage } = await params;
+    const data = await getStaticPage(staticPage)
+
     return (
         <div className='bg-gray-100 blog-content'>
-            <h1 className=' text-center text-3xl sm:text-4xl lg:text-5xl p-4 font-semibold'>{capitalise(data.page)}</h1>
+            <h1 className=' text-center text-3xl sm:text-4xl lg:text-5xl p-4 font-semibold'>{capitalise(data.title)}</h1>
             {data.description && <RenderHtml html={data.description} />}
         </div>
     )

@@ -1,7 +1,7 @@
 import { Hono } from "hono"
 import { serveStatic } from "hono/deno"
 import { logger } from "hono/logger"
-import { blogs, featuredBlog, pageMetaData, authors } from "./static.js";
+import { blogs, featuredBlog, pageMetaData, authors, staticPageLinks, staticPages } from "./static.js";
 
 
 const SOCIAL_MEDIA = [
@@ -12,7 +12,6 @@ const SOCIAL_MEDIA = [
   { name: "instagram", link: "/ig" },
 ]
 
-const navigations = [{ link: "/", name: "Home" }, { link: "/", name: "About" },]
 
 export const createApp = () => {
   const app = new Hono()
@@ -20,10 +19,26 @@ export const createApp = () => {
   app.use(logger())
   app.get("/logo", (c) => c.json({ url: "https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg" }))
 
-  app.get("/get-navigation", (c) => c.json(navigations))
+  app.get("/get-navigation", (c) => c.json(staticPageLinks))
+  app.get("/static-page/:slug", (c) => {
+    const { slug } = c.req.param();
+
+    if (slug in staticPages) {
+      return c.json(staticPages[slug])
+    }
+
+    return c.body("Not Found", 404);
+  })
   app.get("/get-social-media", (c) => c.json(SOCIAL_MEDIA))
 
-  app.get("/meta-data/home", (c) => c.json(pageMetaData.home))
+  app.get("/meta-data/:page", (c) => {
+    const { page } = c.req.param();
+    if (page in pageMetaData) {
+      return c.json(pageMetaData[page])
+    }
+    console.log("Not in the ");
+    return c.body("Not Fount", 404);
+  })
 
   app.get("/single-fetaured", (c) => c.json(featuredBlog))
 
@@ -35,8 +50,6 @@ export const createApp = () => {
         categories.push({ categoryName: blog.category })
       }
     }
-    console.log({ categories });
-
     return c.json(categories)
   })
   app.get("/blogs", (c) => c.json(blogs))

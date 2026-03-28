@@ -1,8 +1,8 @@
 export const APIS = {
   LOGO: "/logo",
-  META_DATA: {
-    HOME: "/meta-data/home"
-  },
+
+  META_DATA: "/meta-data",
+
   NAVIGATIONS: "/get-navigation",
   SOCIAL_MEDIA: "/get-social-media",
   BLOGS: "/blogs",
@@ -10,7 +10,8 @@ export const APIS = {
   HERO_POST: "/single-fetaured",
   AUTHORS: "/all-writers",
   CATEGORIES: "/categories",
-  AUTHOR_BLOGS: "/get-blogs-by-author-id"
+  AUTHOR_BLOGS: "/get-blogs-by-author-id",
+  STATIC_PAGES: "/static-page",
 }
 
 const handleRequest = async (path) => {
@@ -23,12 +24,16 @@ const handleRequest = async (path) => {
 }
 
 
-export const homeMetaText = async () => {
-  const res = await handleRequest(APIS.META_DATA.HOME)
+export const getMetaData = async (name) => {
+  const res = await handleRequest(`${APIS.META_DATA}/${name}`)
   if (!res.ok) {
     return { metaDescription: "something", metaKeywords: "keywords", title: "some title" }
   }
   return res.json()
+}
+
+export const homeMetaText = async () => {
+  return await getMetaData("home")
 }
 
 export const getLogo = async () => {
@@ -108,4 +113,14 @@ export const getBlogsByAuthorId = async (id) => {
     return []
   }
   return res.json()
+}
+
+
+export const getStaticPage = async (slug) => {
+  const res = await handleRequest(`${APIS.STATIC_PAGES}/${slug}`)
+  if (!res.ok) {
+    return {}
+  }
+  return res.json()
+
 }

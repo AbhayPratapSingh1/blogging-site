@@ -37,13 +37,12 @@ export const SocialMediaTags = ({ socialMedia }) => {
 
 const NavTags = ({ nav }) => {
     const navDetails = nav
-    console.log(navDetails);
 
     return (
         <div className="max-w-[700px] shrink-0 lg:flex gap-20 text-lg text-gray-700 dark:bg-white ">
             {navDetails.length > 0 && navDetails.map((item, key) => {
                 return (
-                    <Link href={`/${item.link}`} key={key} className="text-[18px] ">{capitalise(item.name)}</Link>
+                    <Link href={`${item.link}`} key={key} className="text-[18px] ">{capitalise(item.name)}</Link>
                 )
             })}
         </div>

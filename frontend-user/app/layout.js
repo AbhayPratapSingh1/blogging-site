@@ -33,7 +33,7 @@ export default async function RootLayout({ children }) {
         <hr />
         {children}
         <hr />
-        <Footer socialMedia={socialMedias} />
+        <Footer socialMedia={socialMedias} staticPages={navTags} />
         <hr />
       </body>
     </html>
