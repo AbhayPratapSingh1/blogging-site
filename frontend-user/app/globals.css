@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+html{
+  scroll-behavior: smooth;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+.blog-content h1{
+  padding-top: 4rem;
+  font-size: 3.8rem;
+ }
+ 
+ .blog-content h2{
+  font-size: 1.7rem;
+ }
+ 
+ .blog-content h3{
+  font-size: 1.6rem;
+ }
+ 
+ .blog-content h4{
+  font-size: 1.5rem;
+  padding: 0.8rem 0;
+ }
+ 
+ .blog-content h5{
+  font-size: 1.4rem;
+ }
+ 
+ .blog-content h6{
+  font-size: 1.2rem;
+ }
+ 
+
+ .blog-content a{
+ color: blue;
+ }
+ 
+
+ /* img , blockquote strong , ul li , ol li , table ,  */
+
+.blog-content p{
+ font-size: 1.2rem;
+}
+
+blockquote{
+  background-color: rgb(225, 224, 224);
+  border-left: 8px;
+  border-top: 5px;
+  border-bottom: 1px;
+  border-right: 1px;
+  border-color: rgb(97, 97, 97);
+  border-style: double;
+  margin: 15px;
+  padding: 8px;
+  color: rgb(82, 82, 82);
+  font-size: 14px;
+}
