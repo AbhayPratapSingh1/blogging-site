@@ -8,12 +8,13 @@ import {
     updateNavigationRequest,
 } from "../../features/navigationSlice";
 import { useNavigate, useNavigation, useParams } from "react-router-dom";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
 import NotificationModal from "../../Components/modals/NotificationModal";
 import { setMessage } from "../../features/appSlice";
 import { FieldBox } from "../common/fieldBox";
 import { singleSiteRequest } from "../../features/siteSlice";
+
 export default function AddUpdateNavigation({ edit }) {
     const dispatch = useDispatch();
     const { siteId } = useParams();
@@ -26,6 +27,7 @@ export default function AddUpdateNavigation({ edit }) {
     const errorMessage = useSelector((state) =>
         state.navigation.errorInNavigation
     );
+
     const successMessage = useSelector((state) => state.app.message);
 
     const submitFunction = async (value) => {
@@ -59,9 +61,16 @@ export default function AddUpdateNavigation({ edit }) {
     useEffect(() => {
         dispatch(singleSiteRequest(siteId));
         if (edit) {
+            console.log("Sending");
             dispatch(singleNavigationRequest(navId));
+            return;
         }
+
+        console.log("not sending");
     }, [dispatch, siteId, navId]);
+    console.log("\n\n\n\n");
+    console.log({ singleNav });
+
     return (
         <>
             {successMessage && (

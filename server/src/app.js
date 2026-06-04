@@ -7,19 +7,23 @@ import { sign, jwt } from "hono/jwt"
 import { featuredBlog, authors } from "./static.js";
 import { handleLogo, handlePageMetaData, SOCIAL_MEDIA, handleAllBlogs, handleBlogByAuthorId, handleBlogByCategory, handleCategories, handleStaticPageBySlug, handlePageBySlug } from "./handlers.js"
 import { SiteHandler } from "./siteHandler.js";
+import { NavigationsHandler } from "./navigationHandler.js";
 
 
 export const createApp = () => {
   const sitesHandler = {}
-  const siteHandler = new SiteHandler("site-id-1", "My Site")
-
-  siteHandler.addNavigation({ name: "About", link: "/about", position: 1 })
-  siteHandler.addNavigation({ name: "Privacy Policy", link: "/privacy", position: 2 })
-  siteHandler.addNavigation({ name: "Contact Us", link: "/contact-us", position: 3 })
+  const mainSiteId = "site-id-1";
+  const navigationsHandler = new NavigationsHandler({}, 1);
+  const siteHandler = new SiteHandler(mainSiteId, "My Site")
 
 
-  sitesHandler["site-id-1"] = siteHandler
+  const aboutNavId = navigationsHandler.addNewNavigation("About", "/about", 1, mainSiteId)
+  const policyNavId = navigationsHandler.addNewNavigation("Privacy Policy", "/privacy", 2, mainSiteId)
+  const contactUsNavId = navigationsHandler.addNewNavigation("Contact Us", "/contact-us", 3, mainSiteId)
 
+  siteHandler.addNavigation(aboutNavId, policyNavId, contactUsNavId)
+
+  sitesHandler[mainSiteId] = siteHandler
 
 
   const secret = "12345678"
@@ -64,17 +68,30 @@ export const createApp = () => {
 
   app.get("/api/navigation-by-site-id/:siteId", (c) => {
     const { siteId } = c.req.param();
-    const siteHandler = sitesHandler[siteId]
-    return c.json(siteHandler.getNavigations())
+    return c.json(navigationsHandler.getNavigationBySiteId(siteId))
+  })
+
+  app.get("/api/navigation/:id", (c) => {
+    const { id } = c.req.param();
+    return c.json(navigationsHandler.getNavigationByNavId(id))
   })
 
   app.post("/api/add-navigation", async (c) => {
-    const { name, position, link, site } = await c.req.json();
-    const siteHandler = sitesHandler[site];
+    console.log("THIS IS HERE \n\n");
 
-    siteHandler.addNavigation({ name, position: +position, link });
+    const { name, position, link, site } = await c.req.json();
+    navigationsHandler.addNewNavigation(name, link, +position, site);
     return c.json({ status: true, message: "Done adding new Navigation" })
   })
+
+
+  app.delete("/api/navigation/:id", (c) => {
+    const { id } = c.req.param();
+    navigationsHandler.deleteNavigationByNavId(id);
+    return c.json({ message: "Deleted!" })
+  })
+
+
 
 
 
@@ -82,7 +99,7 @@ export const createApp = () => {
   app.get("/logo", handleLogo)
   app.get("/meta-data/:page", handlePageMetaData)
 
-  app.get("/get-navigation", (c) => c.json(siteHandler.getNavigations()))
+  app.get("/get-navigation", (c) => c.json(navigationsHandler.getNavigationBySiteId(mainSiteId)))
   app.get("/get-social-media", (c) => c.json(SOCIAL_MEDIA))
 
   app.get("/blogs", handleAllBlogs)

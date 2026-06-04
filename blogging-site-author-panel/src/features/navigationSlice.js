@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { navigationAPI } from '../api/navigationAPI'
 import { setMessage } from './appSlice'
-import { useSelector } from 'react-redux'
 
 export const getAllNavigationRequest = createAsyncThunk("navigation/getAllNavigationRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {

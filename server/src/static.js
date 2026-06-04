@@ -482,7 +482,8 @@ export const staticPages = {
     title: "About Us",
     description: `
       <section>
-        <h2>The Journey of a Pokémon Master</h2>
+        <h2>HELLO WORLD</h2>
+        
         <p>Founded in <strong>Pallet Town</strong>, our mission is to provide the most comprehensive research and news across the Kanto and Johto regions.</p>
         <p>Whether you're a beginner starting with your first partner or an Elite Four contender, we're here to help you catch 'em all. Our team of dedicated Professors works around the clock to document every species and battle strategy known to the Pokémon world.</p>
         <ul>

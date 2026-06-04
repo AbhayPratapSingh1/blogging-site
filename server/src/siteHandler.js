@@ -20,10 +20,10 @@ export class SiteHandler {
     this.navigations = navigations.map((props, id) => ({ _id: this.navId++, ...props, site: this.name }))
 
   }
-  addNavigation({ name, link, position }) {
-    console.log({ position });
+  addNavigation(...ids) {
 
-    this.navigations.push({ name, link, position, _id: this.navId++, site: this.name });
+
+    this.navigations.push(...ids);
   }
   getNavigations() {
     return this.navigations;
