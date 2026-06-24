@@ -1,0 +1,40 @@
+meta {
+  name: Create Blog
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/add-new-page
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "title": "New Blog Post",
+    "slug": "new-blog-post",
+    "description": "<p>Blog content here</p>",
+    "category": "Tech",
+    "tags": "deno, javascript",
+    "author": {
+      "authorId": "auth-001",
+      "name": "Rajesh",
+      "url": ""
+    },
+    "images": {
+      "name": "",
+      "url": ""
+    },
+    "metadata": {
+      "title": "New Blog Post",
+      "keywords": "tech, coding",
+      "description": "A new blog post"
+    },
+    "siteId": "site-id-1"
+  }
+}

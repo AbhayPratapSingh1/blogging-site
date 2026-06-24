@@ -1,0 +1,15 @@
+meta {
+  name: Delete Social Media
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/social-media/soc-001
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

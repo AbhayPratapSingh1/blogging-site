@@ -1,0 +1,22 @@
+meta {
+  name: Create Tag
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/tags
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "tagName": "new-tag",
+    "siteId": "site-id-1"
+  }
+}

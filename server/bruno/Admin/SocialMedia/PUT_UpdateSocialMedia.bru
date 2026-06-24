@@ -1,0 +1,22 @@
+meta {
+  name: Update Social Media
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/social-media/soc-001
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "gitlab",
+    "link": "https://gitlab.com"
+  }
+}

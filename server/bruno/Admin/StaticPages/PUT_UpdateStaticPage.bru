@@ -1,0 +1,22 @@
+meta {
+  name: Update Static Page
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/single-static-page/static-about
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "title": "Updated About Us",
+    "description": "<p>Updated content</p>"
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Delete Static Page
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/single-static-page/static-about
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

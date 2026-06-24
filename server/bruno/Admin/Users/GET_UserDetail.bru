@@ -1,0 +1,15 @@
+meta {
+  name: Get User Detail
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/get-user-detail
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

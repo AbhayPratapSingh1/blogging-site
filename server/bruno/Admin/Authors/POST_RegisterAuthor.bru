@@ -1,0 +1,25 @@
+meta {
+  name: Register Author
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/admin/register
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "New Author",
+    "email": "new@author.com",
+    "profilePic": {
+      "url": "https://example.com/avatar.png"
+    }
+  }
+}

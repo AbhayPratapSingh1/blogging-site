@@ -1,0 +1,20 @@
+meta {
+  name: Create Navigation
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/api/add-navigation
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "About",
+    "position": 1,
+    "link": "/about",
+    "site": "site-id-1"
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Get Single Category
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/category/cat-001
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

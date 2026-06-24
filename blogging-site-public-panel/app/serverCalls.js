@@ -18,6 +18,8 @@ export const APIS = {
 
 const handleRequest = async (path) => {
   try {
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+    
     return fetch(`${process.env.NEXT_PUBLIC_API_URL}${path}`)
   } catch (e) {
     console.log(e);

@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Blogging Platform API",
+  "type": "collection",
+  "ignore": [
+    "*.json",
+    ".*"
+  ]
+}

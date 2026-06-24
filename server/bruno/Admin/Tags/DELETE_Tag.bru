@@ -1,0 +1,15 @@
+meta {
+  name: Delete Tag
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{baseUrl}}/api/tags/tag-001
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

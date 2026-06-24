@@ -39,7 +39,7 @@ function DashBoardLayout({ children, title }) {
 
     const tokenData = jwtDecode(token);
 
-    if (tokenData.expiresIn && tokenData.expiresIn < Date.now()) {
+    if (tokenData.exp && tokenData.exp < Math.floor(Date.now() / 1000)) {
       handleInvalidToken();
     }
 

@@ -1,0 +1,19 @@
+meta {
+  name: Update Navigation
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/navigation/nav-001
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Updated About",
+    "position": 2,
+    "link": "/about-us"
+  }
+}

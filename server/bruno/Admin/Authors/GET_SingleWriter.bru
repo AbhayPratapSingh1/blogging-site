@@ -1,0 +1,15 @@
+meta {
+  name: Get Single Writer
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/api/get-writer/auth-001
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}

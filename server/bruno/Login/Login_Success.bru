@@ -1,0 +1,23 @@
+meta {
+  name: Login Success
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "user@gmail.com",
+    "password": "12345"
+  }
+}
+
+script:post-response {
+  const data = res.getBody();
+  bru.setVar("jwtToken", data.accessToken);
+}

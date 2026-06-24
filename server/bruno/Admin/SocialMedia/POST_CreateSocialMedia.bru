@@ -1,0 +1,23 @@
+meta {
+  name: Create Social Media
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/add-social-media
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "github",
+    "link": "https://github.com",
+    "siteId": "site-id-1"
+  }
+}
