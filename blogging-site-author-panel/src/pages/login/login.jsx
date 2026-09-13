@@ -47,8 +47,8 @@ const Login = () => {
                 {errorInLogin && (
                     <NotificationModal
                         message={errorInLogin}
-                        open={errorInLogin}
-                        close={() => dispatch(clearError())}
+                        modelOpen={errorInLogin}
+                        modelClose={() => dispatch(clearError())}
                     />
                 )}
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

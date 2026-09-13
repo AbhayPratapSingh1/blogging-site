@@ -83,20 +83,22 @@ export const blogSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllBlogsRequest.rejected, (state, action)=>{
-        state.errorInBlogs= action.payload
-    }),
-    builder.addCase(addNewBlogRequest.rejected, (state, action)=>{
-        state.errorInBlogs= action.payload
-    }),    builder.addCase(updateBlogRequest.rejected, (state, action)=>{
-        state.errorInBlogs= action.payload
-    }),
-    builder.addCase(singleBlogRequest.rejected, (state, action)=>{
-        state.errorInBlogs= action.payload
-    }),
-    builder.addCase(deleteBlogRequest.rejected, (state, action)=>{
-        state.errorInBlogs= action.payload
-    })
+    builder
+        .addCase(getAllBlogsRequest.rejected, (state, action)=>{
+            state.errorInBlogs= action.payload
+        })
+        .addCase(addNewBlogRequest.rejected, (state, action)=>{
+            state.errorInBlogs= action.payload
+        })
+        .addCase(updateBlogRequest.rejected, (state, action)=>{
+            state.errorInBlogs= action.payload
+        })
+        .addCase(singleBlogRequest.rejected, (state, action)=>{
+            state.errorInBlogs= action.payload
+        })
+        .addCase(deleteBlogRequest.rejected, (state, action)=>{
+            state.errorInBlogs= action.payload
+        })
 }
 })
 

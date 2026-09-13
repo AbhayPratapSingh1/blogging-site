@@ -1,20 +1,20 @@
-`# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-frontend-user/node_modules
+**/node_modules/
 /.pnp
-frontend-user/.pnp.js
-frontend-user/.yarn/install-state.gz
+.pnp.js
+.yarn/install-state.gz
 
 # testing
-frontend-user/coverage
+**/coverage/
 
 # next.js
-frontend-user/.next/
-frontend-user/out/
+**/.next/
+**/out/
 
 # production
-frontend-user/build
+**/build/
 
 # misc
 .DS_Store
@@ -26,11 +26,36 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-frontend-user/.env*.local
+.env*.local
 
 # vercel
-frontend-user/.vercel
+.vercel
 
 # typescript
-frontend-user/*.tsbuildinfo
-frontend-user/next-env.d.ts
+*.tsbuildinfo
+next-env.d.ts
+
+# docker data
+blogging-mongo-data/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+server/.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Alembic
+server/alembic/versions/*.pyc
+
+# Server env (keep .env.example)
+server/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

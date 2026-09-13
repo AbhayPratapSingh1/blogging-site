@@ -5,8 +5,8 @@ import blogReducer from "../features/blogSlice"
 import authorReducer from '../features/authorSlice'
 import categoryReducer from '../features/categorySlice'
 import staticPagesReducer from '../features/staticPagesSlice'
-import navigationSlice from '../features/navigationSlice'
-import tagsSlice from '../features/tagsSlice'
+import navigationReducer from '../features/navigationSlice'
+import tagsReducer from '../features/tagsSlice'
 import socialMediaReducer from '../features/socialMediaSlice'
 import siteReducer from '../features/siteSlice'
 
@@ -18,8 +18,8 @@ export const store = configureStore({
     author:authorReducer,
     category:categoryReducer,
     staticPages:staticPagesReducer,
-    navigation:navigationSlice,
-    tags:tagsSlice,
+    navigation:navigationReducer,
+    tags:tagsReducer,
     socialMedia:socialMediaReducer,
     sites:siteReducer
   },

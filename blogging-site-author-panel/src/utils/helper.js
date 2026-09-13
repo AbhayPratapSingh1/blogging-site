@@ -16,9 +16,8 @@ export const uploadImageToAPI = async (imageFile) => {
   const formData = new FormData();
   formData.append('file', imageFile);
   const uploadToServer = await axios.post(`${process.env.REACT_APP_API_URL}/upload-single-image`, formData, {
-    headers: { 'Access-Control-Allow-Origin': '*' }
+    headers: {}
   });
 
-  console.log("uploadign image to server is maybe done recieved data : ", uploadToServer);
   return uploadToServer?.data;
 };

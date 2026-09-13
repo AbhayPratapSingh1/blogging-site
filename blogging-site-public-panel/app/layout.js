@@ -14,6 +14,9 @@ export const generateMetadata = async () => {
     title: capitalise(data.metaTitle),
     keywords: data.metaKeywords,
     description: data.metaDescription,
+    alternates: {
+      canonical: process.env.NEXT_PUBLIC_CLIENT_URL || undefined,
+    },
     openGraph: {
       locale: "en_IN",
       type: "website",

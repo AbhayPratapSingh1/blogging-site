@@ -47,7 +47,7 @@ export default function DeleteBlog() {
             <div className="flex justify-between w-full px-20">
               <Link to={`/sites/${siteId}/blogs`}>
                 <button className=" border border-gray-400 text-gray-700 rounded-md text-xl px-5 py-1.5 my-5">
-                  Cancle
+                  Cancel
                 </button>
               </Link>
               <button onClick={() => { deleteBlog(blogId) }} className="bg-red-500 border-r-4 border-b-4 rounded-md text-xl text-white px-5 py-1.5 my-5">

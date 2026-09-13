@@ -26,7 +26,7 @@ export default function AllSites() {
                 Id : {site._id}
               </p>
               <p className={`text-gray-400 text-sm ${statusColor}`}>
-                {site.isActive ? "Acitive" : "Not Active"}
+                {site.isActive ? "Active" : "Not Active"}
               </p>
             </div>
           </Link>

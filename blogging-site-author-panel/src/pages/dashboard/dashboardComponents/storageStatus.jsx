@@ -1,5 +1,5 @@
 const StorageStatus = ({color, icon , total, present, desciption})=>{
-    const width = `${Math.floor(Number(present/total*100))}`
+    const width = total > 0 ? `${Math.floor(Number(present / total * 100))}` : "0"
     return (
         <div className="flex gap-4">
             <div className={`rounded-s bg-gray-200 ${"text-"+color+"-600"} text-2xl h-10 w-10 flex justify-center items-center`}>{icon}</div>

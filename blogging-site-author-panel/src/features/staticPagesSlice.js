@@ -82,20 +82,22 @@ export const staticPagesSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllStaticPagesRequest.rejected, (state, action)=>{
-        state.errorInStaticPages= action.payload
-    }),
-    builder.addCase(addNewStaticPagesRequest.rejected, (state, action)=>{
-        state.errorInStaticPages= action.payload
-    }),    builder.addCase(updateStaticPagesRequest.rejected, (state, action)=>{
-        state.errorInStaticPages= action.payload
-    }),
-    builder.addCase(singleStaticPageRequest.rejected, (state, action)=>{
-        state.errorInStaticPages= action.payload
-    }),
-    builder.addCase(deleteStaticPagesRequest.rejected, (state, action)=>{
-        state.errorInStaticPages= action.payload
-    })
+    builder
+        .addCase(getAllStaticPagesRequest.rejected, (state, action)=>{
+            state.errorInStaticPages= action.payload
+        })
+        .addCase(addNewStaticPagesRequest.rejected, (state, action)=>{
+            state.errorInStaticPages= action.payload
+        })
+        .addCase(updateStaticPagesRequest.rejected, (state, action)=>{
+            state.errorInStaticPages= action.payload
+        })
+        .addCase(singleStaticPageRequest.rejected, (state, action)=>{
+            state.errorInStaticPages= action.payload
+        })
+        .addCase(deleteStaticPagesRequest.rejected, (state, action)=>{
+            state.errorInStaticPages= action.payload
+        })
 }
 })
 

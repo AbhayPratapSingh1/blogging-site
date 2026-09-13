@@ -1,0 +1,25 @@
+meta {
+  name: Update Writer
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/author/auth-001
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{jwtToken}}
+}
+
+body:json {
+  {
+    "name": "Updated Author",
+    "email": "updated@author.com",
+    "profilePic": {
+      "url": "https://example.com/updated-avatar.png"
+    }
+  }
+}

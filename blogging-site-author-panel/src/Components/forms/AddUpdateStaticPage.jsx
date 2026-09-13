@@ -59,15 +59,16 @@ function AddUpdateStaticPage({ edit }) {
     }
     const onSubmitFunction = async (values) => {
         if (edit) {
-            const editValue = { ...values, site: singleSite?.site, staticPageId }
+            const editValue = { ...values, site: singleSite?._id, staticPageId }
             dispatch(updateStaticPagesRequest(editValue))
             return
         }
-        const finalValues = { ...values, site: singleSite?.site }
+        const finalValues = { ...values, site: singleSite?._id }
         dispatch(addNewStaticPagesRequest(finalValues))
     }
 
     useEffect(() => {
+        dispatch(singleSiteRequest(siteId))
         if (edit) {
             dispatch(singleStaticPageRequest(staticPageId))
         }

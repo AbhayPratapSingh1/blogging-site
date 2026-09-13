@@ -82,20 +82,22 @@ export const socialMediaSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllSocialMediaRequest.rejected, (state, action)=>{
-        state.errorInSocialMedia= action.payload
-    }),
-    builder.addCase(addNewSocialMediaRequest.rejected, (state, action)=>{
-        state.errorInSocialMedia= action.payload
-    }),    builder.addCase(updateSocialMediaRequest.rejected, (state, action)=>{
-        state.errorInSocialMedia= action.payload
-    }),
-    builder.addCase(singleSocialMediaRequest.rejected, (state, action)=>{
-        state.errorInSocialMedia= action.payload
-    }),
-    builder.addCase(deleteSocialMediaRequest.rejected, (state, action)=>{
-        state.errorInSocialMedia= action.payload
-    })
+    builder
+        .addCase(getAllSocialMediaRequest.rejected, (state, action)=>{
+            state.errorInSocialMedia= action.payload
+        })
+        .addCase(addNewSocialMediaRequest.rejected, (state, action)=>{
+            state.errorInSocialMedia= action.payload
+        })
+        .addCase(updateSocialMediaRequest.rejected, (state, action)=>{
+            state.errorInSocialMedia= action.payload
+        })
+        .addCase(singleSocialMediaRequest.rejected, (state, action)=>{
+            state.errorInSocialMedia= action.payload
+        })
+        .addCase(deleteSocialMediaRequest.rejected, (state, action)=>{
+            state.errorInSocialMedia= action.payload
+        })
 }
 })
 

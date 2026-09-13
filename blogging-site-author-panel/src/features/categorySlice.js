@@ -82,20 +82,22 @@ export const categorySlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllCategoryRequest.rejected, (state, action)=>{
-        state.errorInCategory= action.payload
-    }),
-    builder.addCase(addNewCategoryRequest.rejected, (state, action)=>{
-        state.errorInCategory= action.payload
-    }),    builder.addCase(updateCategoryRequest.rejected, (state, action)=>{
-        state.errorInCategory= action.payload
-    }),
-    builder.addCase(singleCategoryRequest.rejected, (state, action)=>{
-        state.errorInCategory= action.payload
-    }),
-    builder.addCase(deleteCategoryRequest.rejected, (state, action)=>{
-        state.errorInCategory= action.payload
-    })
+    builder
+        .addCase(getAllCategoryRequest.rejected, (state, action)=>{
+            state.errorInCategory= action.payload
+        })
+        .addCase(addNewCategoryRequest.rejected, (state, action)=>{
+            state.errorInCategory= action.payload
+        })
+        .addCase(updateCategoryRequest.rejected, (state, action)=>{
+            state.errorInCategory= action.payload
+        })
+        .addCase(singleCategoryRequest.rejected, (state, action)=>{
+            state.errorInCategory= action.payload
+        })
+        .addCase(deleteCategoryRequest.rejected, (state, action)=>{
+            state.errorInCategory= action.payload
+        })
 }
 })
 

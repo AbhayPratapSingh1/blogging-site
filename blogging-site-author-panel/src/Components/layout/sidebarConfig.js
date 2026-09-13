@@ -9,7 +9,7 @@ export const sidebarConfig = [
     {
         icon:<RxDashboard />,
         name:"Dashboard",
-        link:"/dashboard/",
+        link:"/dashboard",
         type:true
     },{
 

@@ -82,20 +82,22 @@ export const authorSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllAuthorRequest.rejected, (state, action)=>{
-        state.errorInAuthor= action.payload
-    }),
-    builder.addCase(addNewAuthorRequest.rejected, (state, action)=>{
-        state.errorInAuthor= action.payload
-    }),    builder.addCase(updateAuthorRequest.rejected, (state, action)=>{
-        state.errorInAuthor= action.payload
-    }),
-    builder.addCase(singleAuthorRequest.rejected, (state, action)=>{
-        state.errorInAuthor= action.payload
-    }),
-    builder.addCase(deleteAuthorRequest.rejected, (state, action)=>{
-        state.errorInAuthor= action.payload
-    })
+    builder
+        .addCase(getAllAuthorRequest.rejected, (state, action)=>{
+            state.errorInAuthor= action.payload
+        })
+        .addCase(addNewAuthorRequest.rejected, (state, action)=>{
+            state.errorInAuthor= action.payload
+        })
+        .addCase(updateAuthorRequest.rejected, (state, action)=>{
+            state.errorInAuthor= action.payload
+        })
+        .addCase(singleAuthorRequest.rejected, (state, action)=>{
+            state.errorInAuthor= action.payload
+        })
+        .addCase(deleteAuthorRequest.rejected, (state, action)=>{
+            state.errorInAuthor= action.payload
+        })
 }
 })
 

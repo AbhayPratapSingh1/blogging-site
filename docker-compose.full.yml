@@ -1,0 +1,67 @@
+# docker-compose.full.yml — Full stack with Docker (production/deployment)
+# Usage: docker compose -f docker-compose.full.yml up --build
+
+services:
+  # ─── PostgreSQL ────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16
+    container_name: blogging-postgres
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: blogging_platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - blogging-postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # ─── FastAPI Server ───────────────────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: blogging-server
+    ports:
+      - "4900:4900"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/blogging_platform
+      PORT: "4900"
+      JWT_SECRET: ${JWT_SECRET:-12345678}
+      AUTH_EMAIL: ${AUTH_EMAIL:-user@gmail.com}
+      AUTH_PASSWORD: ${AUTH_PASSWORD:-12345}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+    restart: unless-stopped
+
+  # ─── Admin Panel (React) ──────────────────────────────────────────
+  admin-panel:
+    build:
+      context: ./blogging-site-author-panel
+      dockerfile: Dockerfile
+    container_name: blogging-admin
+    ports:
+      - "4901:4901"
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  # ─── Public Panel (Next.js) ───────────────────────────────────────
+  public-panel:
+    build:
+      context: ./blogging-site-public-panel
+      dockerfile: Dockerfile
+    container_name: blogging-public
+    ports:
+      - "4902:4902"
+    depends_on:
+      - server
+    environment:
+      NEXT_PUBLIC_API_URL: "http://server:4900"
+    restart: unless-stopped
+
+volumes:
+  blogging-postgres-data:

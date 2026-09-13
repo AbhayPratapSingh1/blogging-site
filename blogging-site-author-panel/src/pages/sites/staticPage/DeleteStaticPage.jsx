@@ -42,13 +42,13 @@ export default function DeleteStaticPage() {
           <div className=" rounded-xl h-full flex items-center justify-center flex-wrap py-auto overflow-hidden">
             <RiDeleteBinFill className="text-red-500 text-[140px]" />
             <div className="basis-full text-xl  font-semibold">
-              <p className="text-center h-fit text-gray-800">ARE YOU SURE TO DELETE STATIC PAGE <br/>"{staticPage.name}"</p>
+              <p className="text-center h-fit text-gray-800">ARE YOU SURE TO DELETE STATIC PAGE <br/>"{staticPage.page}"</p>
               <p className="text-center h-fit text-gray-500 text-sm px-20">This is a irreversable change!</p>
             </div>
             <div className="flex justify-between w-full px-20">
               <Link to={`/sites/${siteId}/static-page`}>
                 <button className=" border border-gray-400 text-gray-700 rounded-md text-xl px-5 py-1.5 my-5">
-                  Cancle
+                  Cancel
                 </button>
               </Link>
               <button onClick={() => { deleteStaticPage(staticPageId) }} className="bg-red-500 border-r-4 border-b-4 rounded-md text-xl text-white px-5 py-1.5 my-5">

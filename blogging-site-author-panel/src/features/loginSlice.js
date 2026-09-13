@@ -9,7 +9,6 @@ export const doLoginRequest = createAsyncThunk("login/doLoginRequest", async (se
         localStorage.setItem('abToken', accessToken)
         dispatch(setIsAuthenticated(true))
     } catch (error) {
-        console.log(error);
         if (error.response) {
             return rejectWithValue(error.response.data.message)
         }
@@ -46,12 +45,10 @@ export const loginSlice = createSlice({
     }
     , extraReducers: (builder) => {
         builder.addCase(getuserRequest.rejected, (state, action) => {
-            console.log("Sucess");
+            console.log("getuser failed:", action.payload);
             state.errorInUser = action.payload
         }),
             builder.addCase(doLoginRequest.rejected, (state, action) => {
-                console.log("Rejected", action.payload);
-
                 state.errorInUser = action.payload
             })
     }

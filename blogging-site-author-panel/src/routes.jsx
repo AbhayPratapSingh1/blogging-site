@@ -76,6 +76,8 @@ const AvailRoutes = (props) => {
       <Route path={`/sites/:siteId/static-page/add-new`} element={<DashBoardLayout title="Add New Static Pages" description="Fill the Form and upload to submit new Static Pages." > <AddUpdateStaticPage/></DashBoardLayout>} />
       <Route path={`/sites/:siteId/static-page/update-static-page/:staticPageId`} element={<DashBoardLayout title="Update Static Page" description="Fill the Form and upload to Update Static Page." > <AddUpdateStaticPage edit /></DashBoardLayout>} />
       <Route path={`/sites/:siteId/static-page/delete/:staticPageId`} element={<DashBoardLayout  title="Delete Your Static Page ?" description="Confirm to delete your Static Page!" > <DeleteStaticPage/></DashBoardLayout>} />
+
+      <Route path={`/sites/:siteId/authors`} element={<DashBoardLayout title="Your Authors" description="Here is the summary of all the Authors that are added." ><AllAuthors/></DashBoardLayout>} />
       
     </Routes>
 

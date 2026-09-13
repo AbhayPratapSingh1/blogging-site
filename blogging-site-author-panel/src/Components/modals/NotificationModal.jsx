@@ -14,7 +14,7 @@ export default function NotificationModal(props) {
     <>
       {props.modelOpen && (
         <Portal selector="#modal">
-          {console.log("model popejd")}
+
           <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-800 bg-opacity-60 overflow-hidden">
             <div className="w-[22rem] h-80 bg-red-50 rounded-xl p-2 ">
               <div className=" rounded-xl h-full flex items-center justify-center flex-wrap py-auto overflow-hidden">

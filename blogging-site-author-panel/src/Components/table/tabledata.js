@@ -97,7 +97,7 @@ export const SocialMediaHeaders = [
 
 export const StaticPageHeader = [
   {
-    headerName: "Desciption",
+    headerName: "Description",
     accesserId: "description",
     type: "string",
     formatFunction: stringClip,

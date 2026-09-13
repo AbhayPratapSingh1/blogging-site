@@ -83,20 +83,22 @@ export const siteSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllSitesRequest.rejected, (state, action)=>{
-        state.errorInSite= action.payload
-    }),
-    builder.addCase(addNewSiteRequest.rejected, (state, action)=>{
-        state.errorInSite= action.payload
-    }),    builder.addCase(updateSiteRequest.rejected, (state, action)=>{
-        state.errorInSite= action.payload
-    }),
-    builder.addCase(singleSiteRequest.rejected, (state, action)=>{
-        state.errorInSite= action.payload
-    }),
-    builder.addCase(deleteSiteRequest.rejected, (state, action)=>{
-        state.errorInSite= action.payload
-    })
+    builder
+        .addCase(getAllSitesRequest.rejected, (state, action)=>{
+            state.errorInSite= action.payload
+        })
+        .addCase(addNewSiteRequest.rejected, (state, action)=>{
+            state.errorInSite= action.payload
+        })
+        .addCase(updateSiteRequest.rejected, (state, action)=>{
+            state.errorInSite= action.payload
+        })
+        .addCase(singleSiteRequest.rejected, (state, action)=>{
+            state.errorInSite= action.payload
+        })
+        .addCase(deleteSiteRequest.rejected, (state, action)=>{
+            state.errorInSite= action.payload
+        })
 }
 })
 

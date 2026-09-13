@@ -81,18 +81,20 @@ export const navigationSlice = createSlice({
         }
     }
     , extraReducers: (builder) => {
-        builder.addCase(getAllNavigationRequest.rejected, (state, action) => {
-            state.errorInNavigation = action.payload
-        }),
-            builder.addCase(addNewNavigationRequest.rejected, (state, action) => {
+        builder
+            .addCase(getAllNavigationRequest.rejected, (state, action) => {
                 state.errorInNavigation = action.payload
-            }), builder.addCase(updateNavigationRequest.rejected, (state, action) => {
+            })
+            .addCase(addNewNavigationRequest.rejected, (state, action) => {
                 state.errorInNavigation = action.payload
-            }),
-            builder.addCase(singleNavigationRequest.rejected, (state, action) => {
+            })
+            .addCase(updateNavigationRequest.rejected, (state, action) => {
                 state.errorInNavigation = action.payload
-            }),
-            builder.addCase(deleteNavigationRequest.rejected, (state, action) => {
+            })
+            .addCase(singleNavigationRequest.rejected, (state, action) => {
+                state.errorInNavigation = action.payload
+            })
+            .addCase(deleteNavigationRequest.rejected, (state, action) => {
                 state.errorInNavigation = action.payload
             })
     }

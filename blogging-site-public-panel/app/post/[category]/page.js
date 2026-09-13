@@ -1,56 +1,45 @@
 import { capitalise, formatDate } from '@/app/Components/helper'
 import { PostBlogs } from '@/app/Components/mainComponents/CategoryPost/categoriesBlock'
-import { getBlogsByCategory, getMetaDataByCategory } from '@/app/serverCalls'
+import { getBlogsByCategory } from '@/app/serverCalls'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-// import Image from 'next/image'
-// import { httpsToHttp, formatDate, capitalise } from '../helper'
-// import Link from 'next/link'
-// import RenderHtml from '../Components/commonToAll/renderHtml'
 
 
 export async function generateMetadata({ params }) {
     const { category } = await params
-    const metaData = await getMetaDataByCategory(category)
+    const posts = await getBlogsByCategory(category)
+    const firstPost = posts?.[0]
 
     return {
-
+        title: `${capitalise(category)} Posts`,
+        description: firstPost?.metaDescription || firstPost?.description?.replace(/<[^>]*>/g, "").slice(0, 160) || `Browse all articles in ${category}`,
+        keywords: firstPost?.metaKeywords || category,
+        openGraph: {
+            locale: "en_IN",
+            type: "website",
+        },
     }
 }
-export async function DataPageMetaTags(params) {
-    const data = await getStaticPage(params.category)
+export async function DataPageMetaTags({ category }) {
+    const data = await getStaticPage(category)
     return {
-        title: capitalise(data.metaTitle),
-        keywords: data.metaKeywords,
-        description: data.metaDescription,
+        title: capitalise(data.title || data.metaTitle),
+        keywords: data.metaKeywords || "",
+        description: data.metaDescription || "",
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${params.page}`,
+            canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${category}`,
         },
         openGraph: {
             locale: "en_IN",
             type: "website",
-            images: [`http://localhost:3000/api/og?title=${encodeURI(capitalise(data.page))}`, { size: { width: 512, height: 512 }, alt: `${data.slug}` }]
         },
     }
 }
 
-export async function CategoryPageMetaTags(params) {
-    const post = await getAllPosts(params.category)
-    // return {
-    //     title: capitalise(post[0]?.category),
-    //     keywords: post.metaKeywords,
-    //     description: post.metaDescription,
-    //     alternates: {
-    //         canonical: `${process.env.NEXT_PUBLIC_CLIENT_URL}/${params.category}`,
-    //     },
-    //     openGraph: {
-    //         locale: "en_IN",
-    //         type: "website",
-    //         images: [`http://localhost:3000/api/og?title=${encodeURI(capitalise(post.title))}`, { size: { width: 512, height: 512 }, alt: `${post.title}` }]
-    //     },
-    // }
-}
+
+
+
 
 
 export async function getAllPosts(slug) {

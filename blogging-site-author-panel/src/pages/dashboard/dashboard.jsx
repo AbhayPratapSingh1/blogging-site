@@ -19,7 +19,6 @@ const Dashboard = () => {
 
     const sites = useSelector((state) => state.sites.allSites);
     useEffect(() => {
-        console.log("Chilederen is loding hence request is send");
         dispatch(getAllSitesRequest());
     }, [dispatch]);
 
@@ -50,7 +49,7 @@ const Dashboard = () => {
                     />
                     <Friends authors={authors} />
                 </div>
-                <RecentBlog siteId={sites[0]?._id} blogs={blog} />
+                {sites && sites.length > 0 && <RecentBlog siteId={sites[0]._id} blogs={blog} />}
             </div>
         </div>
     );

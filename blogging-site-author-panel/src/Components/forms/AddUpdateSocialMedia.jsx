@@ -8,7 +8,6 @@ import { setMessage } from "../../features/appSlice";
 import { FieldBox } from "../common/fieldBox";
 import { singleSiteRequest } from "../../features/siteSlice";
 import { addNewSocialMediaRequest, clearError, singleSocialMediaRequest, updateSocialMediaRequest } from "../../features/socialMediaSlice";
-import { setSingleNavigation } from "../../features/navigationSlice";
 export default function AddUpdateSocialMedia({ edit }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -23,7 +22,7 @@ export default function AddUpdateSocialMedia({ edit }) {
 
 
     const submitFunction = async (value) => {
-        const submitValue = { ...value, site: singleSite.site }
+        const submitValue = { ...value, site: singleSite._id }
         if (edit) {
             const editedValue = { ...submitValue, id: socialMediaId }
             dispatch(updateSocialMediaRequest(editedValue))
@@ -33,7 +32,6 @@ export default function AddUpdateSocialMedia({ edit }) {
     }
 
     const initialValues = {
-        // this is needed to be correct once checked from the browser
         name: edit ? singleSocialMedia?.name : "",
         link: edit ? singleSocialMedia?.link : "",
     }
@@ -41,7 +39,6 @@ export default function AddUpdateSocialMedia({ edit }) {
     const resetAndNavigate = ({ error }) => {
         dispatch(clearError())
         dispatch(setMessage(""))
-        dispatch(setSingleNavigation({}))
         !error && navigate(`/sites/${siteId}/social-media`)
     }
 

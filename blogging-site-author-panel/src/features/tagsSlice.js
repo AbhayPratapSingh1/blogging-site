@@ -6,7 +6,6 @@ export const getAllTagsRequest = createAsyncThunk("tags/getAllTagsRequest", asyn
     try {
         const data= await tagsAPI.getAll(sendData)
         dispatch(setAllTags(data))
-        console.log("done request"+ data);
     } catch (error) {
         if (error.response) {
             return rejectWithValue(error.response.data.message)
@@ -83,20 +82,22 @@ export const tagsSlice = createSlice({
         }
     }
 , extraReducers:(builder)=>{
-    builder.addCase(getAllTagsRequest.rejected, (state, action)=>{
-        state.errorInTags= action.payload
-    }),
-    builder.addCase(addNewTagsRequest.rejected, (state, action)=>{
-        state.errorInTags= action.payload
-    }),    builder.addCase(updateTagsRequest.rejected, (state, action)=>{
-        state.errorInTags= action.payload
-    }),
-    builder.addCase(singleTagsRequest.rejected, (state, action)=>{
-        state.errorInTags= action.payload
-    }),
-    builder.addCase(deleteTagsRequest.rejected, (state, action)=>{
-        state.errorInTags= action.payload
-    })
+    builder
+        .addCase(getAllTagsRequest.rejected, (state, action)=>{
+            state.errorInTags= action.payload
+        })
+        .addCase(addNewTagsRequest.rejected, (state, action)=>{
+            state.errorInTags= action.payload
+        })
+        .addCase(updateTagsRequest.rejected, (state, action)=>{
+            state.errorInTags= action.payload
+        })
+        .addCase(singleTagsRequest.rejected, (state, action)=>{
+            state.errorInTags= action.payload
+        })
+        .addCase(deleteTagsRequest.rejected, (state, action)=>{
+            state.errorInTags= action.payload
+        })
 }
 })
 

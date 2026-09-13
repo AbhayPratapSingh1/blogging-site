@@ -1,19 +1,24 @@
-import { getLogo } from "@/app/layout";
-import Image from "next/image";
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-
+const getLogoUrl = async () => {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/logo`);
+    const data = await res.json();
+    return data.url || null;
+  } catch {
+    return null;
+  }
+};
 
 export async function GET(req) {
-  const pageLogo = await getLogo()
   const { searchParams } = new URL(req.url);
   const hasTitle = searchParams.has("title");
   const title = hasTitle ? searchParams.get("title") : "My";
-  const logo = await fetch(new URL("/public/og.png", import.meta.url)).then(
-    (res) => res.arrayBuffer()
-  );
+  const logo = await getLogoUrl();
+
   const options = {
     width: 512,
     height: 512,
@@ -44,7 +49,15 @@ export async function GET(req) {
             alignItems: "center",
           }}
         >
-          <Image height={48} alt="logo" width={48} src={logo} />
+          {logo && (
+            <img
+              height={48}
+              alt="logo"
+              width={48}
+              src={logo}
+              style={{ borderRadius: 8 }}
+            />
+          )}
           <span
             style={{
               marginLeft: 16,

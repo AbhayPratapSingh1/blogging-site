@@ -1,8 +1,8 @@
-import { FaInstagram,FaTwitter ,FaFacebook,FaWhatsapp,FaLinkedin,FaSearch } from "react-icons/fa";
+import { FaInstagramSquare, FaTwitterSquare, FaFacebookSquare, FaWhatsappSquare, FaLinkedinIn, FaSearch } from "react-icons/fa";
 export const mediaImages = {
-    facebook:<FaFacebook/>,
-    whatsapp:<FaWhatsapp/>,
-    linkedin:<FaLinkedin/>,
-    twitter:<FaTwitter/>,
-    instagram:<FaInstagram/>,
+    facebook:<FaFacebookSquare/>,
+    whatsapp:<FaWhatsappSquare/>,
+    linkedin:<FaLinkedinIn/>,
+    twitter:<FaTwitterSquare/>,
+    instagram:<FaInstagramSquare/>,
 }

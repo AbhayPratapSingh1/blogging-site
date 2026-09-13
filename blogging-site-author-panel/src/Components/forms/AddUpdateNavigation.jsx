@@ -7,7 +7,7 @@ import {
     singleNavigationRequest,
     updateNavigationRequest,
 } from "../../features/navigationSlice";
-import { useNavigate, useNavigation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as yup from "yup";
 import NotificationModal from "../../Components/modals/NotificationModal";
@@ -61,15 +61,10 @@ export default function AddUpdateNavigation({ edit }) {
     useEffect(() => {
         dispatch(singleSiteRequest(siteId));
         if (edit) {
-            console.log("Sending");
             dispatch(singleNavigationRequest(navId));
             return;
         }
-
-        console.log("not sending");
     }, [dispatch, siteId, navId]);
-    console.log("\n\n\n\n");
-    console.log({ singleNav });
 
     return (
         <>
@@ -113,9 +108,7 @@ export default function AddUpdateNavigation({ edit }) {
                             />
                             <div className="w-96 text-center my-5">
                                 <button
-                                    onClick={() => {
-                                        console.log("click on the vtuuton");
-                                    }}
+                                    onClick={() => {}}
                                     disabled={false}
                                     className=" px-4 py-2 rounded bg-blue-700 text-white  disabled:bg-gray-200 "
                                     type="submit"

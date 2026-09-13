@@ -10,10 +10,10 @@ function AllAuthors() {
   const dispatch = useDispatch()
 
   const Authors = useSelector(state => state.author.allAuthors)
-  console.log("tags  L ", Authors);
+
 
   useEffect(() => {
-    dispatch(getAllAuthorRequest())
+    dispatch(getAllAuthorRequest(siteId))
   }, [dispatch])
   return (
     <div className="flex flex-wrap justify-evenly gap-2 my-5">
@@ -25,8 +25,8 @@ function AllAuthors() {
               <div className="text-black font-bold text-lg">{each.name}</div>
               <div className="text-gray-400 font-extralight text-sm">{each.email}</div>
               <div className=" mt-5 flex  basis-full gap-10 justify-center">
-                <Link to={``}> <div className="border px-2 rounded text-gray-500 bg-gray-200">Edit</div></Link>
-                <Link to={``}> <div className="border px-2 rounded text-gray-500 bg-gray-200">Delete</div></Link>
+                <Link to={`/sites/${siteId}/authors/update-author/${each._id}`}> <div className="border px-2 rounded text-gray-500 bg-gray-200">Edit</div></Link>
+                <Link to={`/sites/${siteId}/authors/delete/${each._id}`}> <div className="border px-2 rounded text-gray-500 bg-gray-200">Delete</div></Link>
               </div>
             </div>
           </div>

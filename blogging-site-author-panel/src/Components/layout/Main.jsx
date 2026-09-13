@@ -1,6 +1,6 @@
-import Table from "../Table";
+import Table from "../table/Table";
 import { cardsConfig } from "./mainConfig"
-import { headerBlogs } from "../tabledata"
+import { headerBlogs } from "../table/tabledata"
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllBlogsRequest } from "../../features/blogSlice";

@@ -16,7 +16,7 @@ function AllBlogs() {
   useEffect(() => {
     dispatch(getAllBlogsRequest(siteId))
   }, [dispatch])
-  console.log(data[0]);
+
   return (
     <div className='px-5 bg-gray-100'>
       <p className="text-md font-bold">Total Blogs</p>

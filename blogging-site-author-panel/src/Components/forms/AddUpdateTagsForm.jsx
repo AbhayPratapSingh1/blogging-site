@@ -44,11 +44,10 @@ export default function AddUpdateTagsForm({ edit }) {
                 return
             }
             const dataToSend = {
-                ...values, site: fetchedSingleSite.site
+                ...values, site: fetchedSingleSite._id
             }
 
             dispatch(addNewTagsRequest(dataToSend))
-            console.log(dataToSend, "all form values")
         }
     })
     useEffect(() => {
