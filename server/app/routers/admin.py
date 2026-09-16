@@ -94,7 +94,9 @@ async def delete_site_alt(site_id: str, db: AsyncSession = Depends(get_db)):
 
 # ─── Blogs/Pages ───────────────────────────────────────────────────────
 @router.get("/pages-by-site-id/{site_id}")
-async def get_blogs_by_site(site_id: str, db: AsyncSession = Depends(get_db)):
+async def get_blogs_by_site(site_id: str, page: int = None, limit: int = None, db: AsyncSession = Depends(get_db)):
+    if page is not None and limit is not None:
+        return await blog.find_by_site_id_paginated(db, site_id, page, limit)
     return await blog.find_by_site_id(db, site_id)
 
 

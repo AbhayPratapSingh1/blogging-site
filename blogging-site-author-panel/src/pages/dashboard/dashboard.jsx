@@ -13,6 +13,7 @@ import { getAllAuthorRequest } from "../../features/authorSlice";
 const Dashboard = () => {
     const dispatch = useDispatch();
     const blog = useSelector((state) => state.blogs.allBlogs);
+    const blogTotal = useSelector((state) => state.blogs.total);
     const categories = useSelector((state) => state.category.allCategories);
     const tags = useSelector((state) => state.tags.allTags);
     const authors = useSelector((state) => state.author.allAuthors);
@@ -25,7 +26,7 @@ const Dashboard = () => {
     useEffect(() => {
         if (sites && sites.length > 0) {
             dispatch(getAllAuthorRequest(sites[0]?._id));
-            dispatch(getAllBlogsRequest(sites[0]?._id));
+            dispatch(getAllBlogsRequest({ siteId: sites[0]?._id, page: 1, limit: 100 }));
             dispatch(getAllTagsRequest(sites[0]?._id));
             dispatch(getAllCategoryRequest(sites[0]?._id));
         }
@@ -35,7 +36,7 @@ const Dashboard = () => {
         <div className=" h-full bg-gray-100 px-5 py-8">
             <DataDetail
                 sites={sites?.length}
-                blog={blog?.length}
+                blog={blogTotal || blog?.length}
                 tags={tags?.length}
                 category={categories?.length}
             />
@@ -43,7 +44,7 @@ const Dashboard = () => {
                 <div className="">
                     <StorageStatic
                         site={sites?.length}
-                        blog={blog?.length}
+                        blog={blogTotal || blog?.length}
                         category={categories?.length}
                         tag={tags?.length}
                     />

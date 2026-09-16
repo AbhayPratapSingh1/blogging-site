@@ -10,11 +10,9 @@ import { getuserRequest } from "./../../features/loginSlice";
 import {
   setIsAuthenticated,
   toggleMultiSelectMenu,
-  toggleProfileMenu,
-  toggleTableMenu,
 } from "../../features/appSlice";
 
-function DashBoardLayout({ children, title }) {
+function DashBoardLayout({ children, title, description }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -41,37 +39,37 @@ function DashBoardLayout({ children, title }) {
 
     if (tokenData.exp && tokenData.exp < Math.floor(Date.now() / 1000)) {
       handleInvalidToken();
+      return;
     }
 
     setAuthorizationToken(token);
     setHeaderFixed(true);
     dispatch(setIsAuthenticated(true));
 
-    if (!user._id) {
+    if (!user?._id) {
       dispatch(getuserRequest());
     }
   }, [navigate, dispatch, isAuthenticated]);
 
-  const handlerHeaderClick = () => {
-    dispatch(toggleMultiSelectMenu(false));
-  };
-
   if (isAuthenticated && headerFixed) {
     return (
-      <div className="flex">
-        <Sidebar onClick={() => dispatch(toggleMultiSelectMenu(false))} />
-
-        <div className="border flex flex-col w-full z-40">
-          {/* <Header onClick={handlerHeaderClick} title={title} /> */}
-          <Header title={title} />
-          {children}
+      <div className="flex min-h-screen bg-gray-100">
+        <Sidebar />
+        <div className="flex-grow flex flex-col">
+          <Header title={title} description={description} />
+          <main className="flex-grow">
+            {children}
+          </main>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="w-full h-full text-3xl flex justify-center items-center">
-        Loading.... please Wait
+      <div className="w-full h-screen flex justify-center items-center bg-gray-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
       </div>
     );
   }

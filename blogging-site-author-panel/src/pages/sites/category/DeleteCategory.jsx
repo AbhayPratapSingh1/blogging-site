@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import NotificationModal from '../../../Components/modals/NotificationModal'
 import { RiDeleteBinFill } from 'react-icons/ri'
 
-
-
 export default function DeleteCategory() {
   const { categoryId, siteId } = useParams()
   const dispatch = useDispatch()
@@ -20,46 +18,48 @@ export default function DeleteCategory() {
   const resetMessage = ({ error }) => {
     dispatch(setMessage(""))
     dispatch(clearError())
-    { !error && navigate(`/sites/${siteId}/categories`) }
+    if (!error) navigate(`/sites/${siteId}/categories`)
   }
 
   useEffect(() => {
     dispatch(singleCategoryRequest(categoryId))
-    console.log("category", category);
-  }, [dispatch])
+  }, [dispatch, categoryId])
 
   const deleteCategory = (id) => {
-    console.log("delete reaeust send");
     dispatch(deleteCategoryRequest(id))
   }
+
   return (
-    <div className='w-full h-full flex justify-center items-center'>
+    <div className='w-full h-full flex justify-center items-center bg-gray-100'>
       {successMessage && <NotificationModal modelOpen={successMessage} message={successMessage} modelClose={resetMessage} />}
       {errorMessage && <NotificationModal modelOpen={errorMessage} message={errorMessage} modelClose={resetMessage} error />}
 
-      <div className="fixed z-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-slate-800 bg-opacity-60 overflow-hidden">
-        <div className="w-[30rem] min-h-80 bg-red-50 rounded-xl p-2 ">
-          <div className=" rounded-xl h-full flex items-center justify-center flex-wrap py-auto overflow-hidden">
-            <RiDeleteBinFill className="text-red-500 text-[140px]" />
-            
-            <div className="basis-full text-xl  font-semibold">
-              <p className="text-center h-fit text-gray-800">ARE YOU SURE TO DELETE CATEGORY <br/>"{category.categoryName}"</p>
-              <p className="text-center h-fit text-gray-500 text-sm px-20">This is a irreversable change!</p>
-            </div>
-            <div className="flex justify-between w-full px-20">
-              <Link to={`/sites/${siteId}/categories`}>
-                <button className=" border border-gray-400 text-gray-700 rounded-md text-xl px-5 py-1.5 my-5">
-                  Cancel
-                </button>
-              </Link>
-              <button onClick={() => { deleteCategory(categoryId) }} className="bg-red-500 border-r-4 border-b-4 rounded-md text-xl text-white px-5 py-1.5 my-5">
-                Delete
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6">
+        <div className="flex flex-col items-center">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4">
+            <RiDeleteBinFill className="text-red-500 text-3xl" />
+          </div>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Delete Category?</h3>
+          <p className="text-gray-600 text-center mb-2">
+            Are you sure you want to delete <span className="font-medium">"{category?.categoryName}"</span>?
+          </p>
+          <p className="text-gray-400 text-sm text-center mb-6">This action cannot be undone.</p>
+          
+          <div className="flex gap-3 w-full">
+            <Link to={`/sites/${siteId}/categories`} className="flex-1">
+              <button className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                Cancel
               </button>
-            </div>
+            </Link>
+            <button 
+              onClick={() => deleteCategory(categoryId)} 
+              className="flex-1 py-2 px-4 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
-    
     </div>
   )
 }

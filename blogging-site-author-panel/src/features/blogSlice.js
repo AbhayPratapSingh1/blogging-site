@@ -4,8 +4,14 @@ import {  setMessage } from './appSlice'
 
 export const getAllBlogsRequest = createAsyncThunk("blogs/getAllBlogsRequest", async (sendData, { dispatch, rejectWithValue }) => {
     try {
-        const data= await blogAPI.getAll(sendData)
-        dispatch(setAllBlogs(data))
+        const { siteId, page, limit } = sendData
+        const data= await blogAPI.getAll(siteId, page, limit)
+        if (page && page > 1) {
+            dispatch(appendBlogs(data))
+        } else {
+            dispatch(setAllBlogs(data))
+        }
+        return data
     } catch (error) {
         if (error.response) {
             return rejectWithValue(error.response.data.message)
@@ -64,7 +70,11 @@ export const deleteBlogRequest = createAsyncThunk("blogs/deleteBlogRequest", asy
 const initialState = {
     allBlogs: [],
     singleBlog: {},
-    errorInBlogs: ''
+    errorInBlogs: '',
+    loading: false,
+    page: 1,
+    hasMore: true,
+    total: 0
 }
 
 
@@ -73,10 +83,32 @@ export const blogSlice = createSlice({
     initialState,
     reducers: {
         setAllBlogs: (state, action) => {
-            state.allBlogs = action.payload
+            state.allBlogs = action.payload.blogs || action.payload
+            state.total = action.payload.total || action.payload.length || 0
+            state.hasMore = action.payload.hasMore ?? true
+            state.page = 1
+            state.loading = false
+        },
+        appendBlogs: (state, action) => {
+            state.allBlogs = [...state.allBlogs, ...(action.payload.blogs || [])]
+            state.hasMore = action.payload.hasMore
+            state.page = action.payload.page || state.page + 1
+            state.loading = false
         },
         setSingleBlog: (state, action) => {
             state.singleBlog = action.payload
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload
+        },
+        setPage: (state, action) => {
+            state.page = action.payload
+        },
+        resetBlogs: (state) => {
+            state.allBlogs = []
+            state.page = 1
+            state.hasMore = true
+            state.loading = false
         },
         clearError: (state) => {
             state.errorInBlogs =''
@@ -84,8 +116,12 @@ export const blogSlice = createSlice({
     }
 , extraReducers:(builder)=>{
     builder
+        .addCase(getAllBlogsRequest.pending, (state)=>{
+            state.loading = true
+        })
         .addCase(getAllBlogsRequest.rejected, (state, action)=>{
             state.errorInBlogs= action.payload
+            state.loading = false
         })
         .addCase(addNewBlogRequest.rejected, (state, action)=>{
             state.errorInBlogs= action.payload
@@ -103,6 +139,6 @@ export const blogSlice = createSlice({
 })
 
 
-export const { setAllBlogs,setSingleBlog, clearError } = blogSlice.actions
+export const { setAllBlogs, appendBlogs, setSingleBlog, setLoading, setPage, resetBlogs, clearError } = blogSlice.actions
 
 export default blogSlice.reducer

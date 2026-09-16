@@ -45,6 +45,19 @@ async def find_by_site_id(db: AsyncSession, site_id: str) -> List[dict]:
     return to_camel_list([row_to_dict(r) for r in result.scalars().all()])
 
 
+async def find_by_site_id_paginated(db: AsyncSession, site_id: str, page: int, limit: int) -> dict:
+    offset = (page - 1) * limit
+    count_result = await db.execute(
+        select(Blog.id).where(Blog.site_id == site_id)
+    )
+    total = len(count_result.scalars().all())
+    result = await db.execute(
+        select(Blog).where(Blog.site_id == site_id).order_by(Blog.created_at.desc()).offset(offset).limit(limit)
+    )
+    blogs = to_camel_list([row_to_dict(r) for r in result.scalars().all()])
+    return {"blogs": blogs, "total": total, "page": page, "hasMore": offset + limit < total}
+
+
 async def create(db: AsyncSession, data: dict) -> str:
     blog = Blog(**data)
     db.add(blog)

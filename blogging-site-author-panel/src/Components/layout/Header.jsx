@@ -1,27 +1,24 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Bell from "./DashBoardLatoutComp/Bell";
 import Author from "./DashBoardLatoutComp/Author";
 import Message from "./DashBoardLatoutComp/Message";
-import { toggleMultiSelectMenu } from "../../features/appSlice";
-export default function Header({ title, description }) {
-  const dispatch = useDispatch();
 
+export default function Header({ title, description }) {
   return (
-    <div // onClick={() => {
-     //   dispatch(toggleMultiSelectMenu(false));
-    // }}
-    className="bg-gray-100 w-full p-4 pb-0 flex z-50 items-top sticky top-0">
-      <div className="ms-5 mt-5">
-        <h1 className="text-gray-600 text-2xl font-bold my-1">
-          {title ? title : ""}
+    <div className="bg-white border-b border-gray-200 w-full px-6 py-4 flex items-center sticky top-0 z-40">
+      <div>
+        <h1 className="text-gray-800 text-xl font-semibold">
+          {title || ""}
         </h1>
-        <p className="text-gray-600 text-sm">
-          {description ? description : ""}
-        </p>
+        {description && (
+          <p className="text-gray-500 text-sm mt-0.5">
+            {description}
+          </p>
+        )}
       </div>
       <div className="flex-grow"></div>
-      <div className="flex justify-center items-center h-max">
+      <div className="flex justify-center items-center gap-3">
         <Bell />
         <Message />
         <Author />

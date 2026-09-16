@@ -2,26 +2,41 @@ import React, { useEffect } from 'react'
 import Table from '../../../Components/table/Table'
 import { StaticPageHeader } from '../../../Components/table/tabledata'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getAllStaticPagesRequest } from '../../../features/staticPagesSlice'
-import AddNew from '../../../Components/common/addNew'
+import { MdOutlineAddBox } from "react-icons/md";
+
 function AllStaticPage() {
   const { siteId } = useParams()
-  const ActionDiv = { name: "add", link: `/sites/${siteId}/static-page/add-new` }
-
   const dispatch = useDispatch()
   const data = useSelector(state => state.staticPages.allStaticPages)
-  // console.log("data L ");
+
   useEffect(() => {
     dispatch(getAllStaticPagesRequest(siteId))
-  }, [dispatch])
+  }, [dispatch, siteId])
+
   return (
-    <div className='p-10 bg-gray-100 flex h-full'>
-      <Table header={StaticPageHeader} streamData={data} ActionDiv={ActionDiv} editLink={`/sites/${siteId}/static-page/update-static-page`} DeleteLink={`/sites/${siteId}/static-page/delete`} />
-      <div className=" w-[20rem] ">
-        <AddNew link={`/sites/${siteId}/static-page/add-new`} />
+    <div className='px-6 py-4 bg-gray-100 min-h-screen'>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800">Static Pages</h2>
+          <p className="text-sm text-gray-500">{data?.length || 0} pages</p>
+        </div>
+        <Link 
+          to={`/sites/${siteId}/static-page/add-new`}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <MdOutlineAddBox className="text-lg" />
+          <span className="font-medium">Add New</span>
+        </Link>
       </div>
 
+      <Table 
+        header={StaticPageHeader} 
+        streamData={data} 
+        editLink={`/sites/${siteId}/static-page/update-static-page`} 
+        DeleteLink={`/sites/${siteId}/static-page/delete`} 
+      />
     </div>
   )
 }

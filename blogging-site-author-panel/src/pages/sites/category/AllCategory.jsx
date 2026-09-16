@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
-
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
 import { getAllCategoryRequest } from '../../../features/categorySlice'
-import AddNew from '../../../Components/common/addNew'
+import { MdOutlineAddBox } from "react-icons/md";
 
 function AllCategory() {
   const { siteId } = useParams()
-
   const [editOn, setEditOn] = useState(-1)
   const dispatch = useDispatch()
   const data = useSelector(state => state.category.allCategories)
@@ -18,34 +15,58 @@ function AllCategory() {
   useEffect(() => {
     dispatch(getAllCategoryRequest(siteId))
   }, [dispatch, siteId])
+
   return (
-    <div className='px-10 py-4 bg-gray-100 h-full' >
-      <p className="text-md text-gray-600 font-bold">Total Categories</p>
-      <p className="text-gray-500">{data.length}</p>
-      <div className="my-5 flex">
-        <div className="border rounded-xl bg-gray-50 p-5 h-max flex flex-wrap gap-x-3 gap-y-2 shadow-2xl">
+    <div className='px-6 py-4 bg-gray-100 min-h-screen'>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800">Categories</h2>
+          <p className="text-sm text-gray-500">{data?.length || 0} total categories</p>
+        </div>
+        <Link 
+          to={`/sites/${siteId}/categories/add-new`}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <MdOutlineAddBox className="text-lg" />
+          <span className="font-medium">Add New</span>
+        </Link>
+      </div>
+
+      <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+        <div className="flex flex-wrap gap-3">
           {data?.length > 0 && data.map((each, index) => {
             return (
-              <div key={index} onMouseEnter={() => { setEditOn(index) }} onMouseLeave={() => { editOn == index && setEditOn(-1) }} className="relative">
-                <div key={index} className="h-10 min-w-24 shrink-0 text-center bg-white px-6 py-1.5 shadow-md rounded-md border border-gray-300">{each.categoryName}</div>
-                {index === editOn &&
-                  <div className="absolute -top-10 right-0 h-10 w-full bg-gray-200  border border-gray-500 text-gray-600 rounded-xl flex justify-center gap-3 text-xl items-center">
-                    <Link to={`/sites/${siteId}/categories/update-category/${each._id}`} >
+              <div 
+                key={index} 
+                onMouseEnter={() => setEditOn(index)} 
+                onMouseLeave={() => editOn === index && setEditOn(-1)} 
+                className="relative group"
+              >
+                <div className="h-10 px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 font-medium">
+                  {each.categoryName}
+                </div>
+                {index === editOn && (
+                  <div className="absolute -top-12 left-0 right-0 h-10 bg-white border border-gray-200 rounded-lg shadow-lg flex justify-center gap-2 items-center z-10">
+                    <Link 
+                      to={`/sites/${siteId}/categories/update-category/${each._id}`}
+                      className="p-1.5 hover:bg-gray-100 rounded-md text-blue-600 transition-colors"
+                    >
                       <FaRegEdit />
                     </Link>
-                    <Link to={`/sites/${siteId}/categories/delete/${each._id}`} >
-                      <div className="text-2xl">
-                        <MdDeleteOutline />
-                      </div>
+                    <Link 
+                      to={`/sites/${siteId}/categories/delete/${each._id}`}
+                      className="p-1.5 hover:bg-red-50 rounded-md text-red-500 transition-colors"
+                    >
+                      <MdDeleteOutline className="text-xl" />
                     </Link>
                   </div>
-                }
+                )}
               </div>
             )
           })}
-        </div>
-        <div className=" min-w-[20rem] ">
-          <AddNew link={`/sites/${siteId}/categories/add-new`} />
+          {(!data || data.length === 0) && (
+            <p className="text-gray-400 text-sm">No categories yet</p>
+          )}
         </div>
       </div>
     </div>

@@ -1,260 +1,49 @@
+"""
+Seed data for the blogging platform.
+Generates 151 Pokemon blog posts with Kanto characters.
+"""
+import sys
+import os
+
+# Add server directory to path
+sys.path.insert(0, os.path.dirname(__file__))
+
+from generate_pokemon_blogs import generate_seed_data, generate_categories, generate_tags, AUTHORS
+
 SEED_TIMESTAMP = 1711639978000
 
+# ─── Generate Pokemon Blogs ────────────────────────────────────────────────
+generated_blogs = generate_seed_data()
+
+# ─── Authors (all 15 characters) ──────────────────────────────────────────
 authors = [
     {
-        "id": "auth-001",
-        "name": "Ash Ketchum",
-        "email": "ash.ketchum@pallettown.com",
+        "id": a["id"],
+        "name": a["name"],
+        "email": a["email"],
         "created_at": SEED_TIMESTAMP,
         "updated_at": SEED_TIMESTAMP,
-        "profile_pic": {"url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Ash"},
-    },
-    {
-        "id": "auth-002",
-        "name": "Professor Oak",
-        "email": "samuel.oak@lab.kanto.com",
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-        "profile_pic": {"url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"},
-    },
-    {
-        "id": "auth-003",
-        "name": "Nurse Joy",
-        "email": "joy@poke-center.com",
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-        "profile_pic": {"url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Joy"},
-    },
-    {
-        "id": "auth-004",
-        "name": "Gary Oak",
-        "email": "blue.oak@victory.com",
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-        "profile_pic": {"url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Gary"},
-    },
-    {
-        "id": "auth-005",
-        "name": "Bill the PC Guy",
-        "email": "bill@pc-storage.com",
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-        "profile_pic": {"url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Bill"},
-    },
+        "profile_pic": {"url": f"https://api.dicebear.com/7.x/pixel-art/jpg?seed={a['seed']}"},
+    }
+    for a in AUTHORS
 ]
 
-blogs = [
-    {
-        "id": "feat-101",
-        "title": "The Ultimate Guide to Dragon-Type Mastery",
-        "description": '<h2>Unleashing the Dragon</h2><p>When it comes to the Kanto region, there isn\'t a Pokémon that commands respect quite like Dragonite.</p><h3>Why Dragonite Rules the Skies</h3><ul><li><strong>Extreme Speed:</strong> It can fly around the globe in just 16 hours.</li><li><strong>Versatile Movepool:</strong> From Hyper Beam to Dragon Claw, it handles any threat.</li><li><strong>Inner Focus:</strong> A true champion never flinches in the heat of battle!</li></ul><p>Training a Dratini all the way to its final form takes patience, but seeing that orange wingspan for the first time makes every battle worth it.</p>',
-        "slug": "evolution-of-kanto",
-        "category": "Gaming",
-        "tags": "pokemon, nintendo, retro-gaming",
-        "meta_title": "Evolution Of Kanto",
-        "meta_keywords": "Dragonite, Dragon-type mastery, Kanto Pokemon, Ash Ketchum training",
-        "meta_description": "Join Ash Ketchum as he breaks down the training secrets and sheer power behind the Kanto region's most iconic Dragon-type, Dragonite.",
-        "author": {"authorId": "auth-001", "name": "Ash Ketchum", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Ash"},
-        "images": {"name": "Dragonite", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": True,
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-001",
-        "title": "Understanding the Genetic Power of Mewtwo",
-        "description": '<h2>The Ethics of Cloning</h2><p>Mewtwo remains the most ambitious and controversial project in the history of Pokémon biology.</p><h3>Biological Superiority</h3><ul><li>Psychic output exceeding 10,000 gigajoules.</li><li>Rapid cellular regeneration capabilities.</li><li>Enhanced cognitive processing beyond human levels.</li></ul><p>However, the question remains: does power define a Pokémon, or is it the heart of the trainer?</p>',
-        "slug": "mewtwo-strikes-back",
-        "category": "Legendary",
-        "tags": "Psychic, Kanto, Legendary-Research",
-        "meta_title": "Mewtwo Strikes Back",
-        "meta_keywords": "Mewtwo, Psychic Pokemon, Legendary Research, Pokemon Cloning, Professor Oak",
-        "meta_description": "Explore the biological superiority and ethical dilemmas behind the creation of Mewtwo.",
-        "author": {"authorId": "auth-002", "name": "Professor Oak", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"},
-        "images": {"name": "Mewtwo Artwork", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-002",
-        "title": "Fire, Water, or Grass: Who Should You Choose?",
-        "description": '<h2>A Guide for New Trainers</h2><p>Walking into Professor Oak\'s lab is a moment you\'ll never forget.</p><h3>The Triangle of Elements</h3><p><strong>Bulbasaur:</strong> Perfect for defense. <strong>Charmander:</strong> For bold trainers. <strong>Squirtle:</strong> Balanced tactical choice.</p><p>Your first partner isn\'t just a tool for battle—they are your lifelong friend.</p>',
-        "slug": "choosing-your-first-partner",
-        "category": "Starters",
-        "tags": "Fire, Water, Grass, Beginner-Guide",
-        "meta_title": "Choosing Your First Partner",
-        "meta_keywords": "Kanto Starters, Bulbasaur, Charmander, Squirtle, Pokemon Beginner Guide",
-        "meta_description": "A comprehensive guide for new trainers on selecting their first partner.",
-        "author": {"authorId": "auth-003", "name": "Nurse Joy", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Joy"},
-        "images": {"name": "Kanto Starters", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-003",
-        "title": "The Mysteries of the Lavender Town Radio Tower",
-        "description": '<h2>The Haunting Frequencies</h2><p>Don\'t bother listening to the rumors—listen to the facts.</p><h3>Investigative Findings</h3><p>During my visit, we recorded strange white noise on Channel 20.5.</p><p>I didn\'t see any ghosts, but my Eevee certainly didn\'t like the basement.</p>',
-        "slug": "haunted-lavender-town",
-        "category": "Ghost Type",
-        "tags": "Ghost, Horror, Lavender-Town",
-        "meta_title": "Haunted Lavender Town",
-        "meta_keywords": "Lavender Town, Ghost Pokemon, Gengar, Pokemon Tower, Gary Oak research",
-        "meta_description": "Investigating the eerie frequencies and ghostly legends surrounding the Lavender Town Radio Tower.",
-        "author": {"authorId": "auth-004", "name": "Gary Oak", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Gary"},
-        "images": {"name": "Gengar Shadow", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-004",
-        "title": "How to Evolve Your Eevee into Eight Different Types",
-        "description": '<h2>The Irregular Genetic Code</h2><p>Eevee is a marvel of nature. Its DNA is uniquely unstable.</p><h3>Known Evolutionary Paths</h3><ul><li><strong>Stones:</strong> Fire, Water, and Thunder Stones.</li><li><strong>Bonding:</strong> Friendship levels trigger Espeon or Umbreon.</li><li><strong>Environment:</strong> Mossy or Icy rocks influence Leafeon and Glaceon.</li></ul>',
-        "slug": "eevee-evolution-guide",
-        "category": "Evolution",
-        "tags": "Eevee, Evolution, Elemental-Stones",
-        "meta_title": "Eevee Evolution Guide",
-        "meta_keywords": "Eevee, Eeveelutions, Fire Stone, Water Stone, Thunder Stone, Espeon, Umbreon",
-        "meta_description": "Learn how to unlock all eight elemental evolutions for Eevee.",
-        "author": {"authorId": "auth-005", "name": "Bill the PC Guy", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Bill"},
-        "images": {"name": "Eevee Family", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": SEED_TIMESTAMP,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-005",
-        "title": "Deciphering the Secrets of the Ruins of Alph",
-        "description": '<h2>A Language Lost to Time</h2><p>The Ruins of Alph represent one of the greatest archaeological puzzles in Johto.</p><h3>Research Highlights</h3><p>Are the Unown symbols based on human writing, or did humans learn to write by imitating the Unown?</p>',
-        "slug": "ancient-ruins-of-alph",
-        "category": "History",
-        "tags": "Unown, Johto, Archaeology",
-        "meta_title": "Ancient Ruins Of Alph",
-        "meta_keywords": "Ruins of Alph, Unown, Johto Archaeology, Pokemon History",
-        "meta_description": "Uncover the secrets of the Unown and the ancient archaeological puzzles of the Johto region.",
-        "author": {"authorId": "auth-002", "name": "Professor Oak", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Oak"},
-        "images": {"name": "Unown Symbols", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/201.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": 1711641200000,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-006",
-        "title": "Why Most Trainers Fail at the Third Gym",
-        "description": '<h2>The Lt. Surge Wall</h2><p>I see it all the time: trainers breeze through Brock and Misty and then get shocked by Lt. Surge.</p><h3>The Winning Formula</h3><ol><li>Bring a Ground-type.</li><li>Identify the "Double Team" spam early.</li><li>Switch out paralyzed Pokémon immediately.</li></ol>',
-        "slug": "gym-leader-strategies",
-        "category": "Competitive",
-        "tags": "Badges, Strategy, Elite-Four",
-        "meta_title": "Gym Leader Strategies",
-        "meta_keywords": "Lt. Surge strategy, Kanto Gym Leaders, Raichu battle, competitive pokemon tips",
-        "meta_description": "Expert advice on overcoming the difficult mid-game gym leaders.",
-        "author": {"authorId": "auth-004", "name": "Gary Oak", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Gary"},
-        "images": {"name": "Blastoise Might", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": 1711642500000,
-        "updated_at": SEED_TIMESTAMP,
-    },
-    {
-        "id": "blog-007",
-        "title": "Breaking the 2-Hour Barrier in Kanto",
-        "description": '<h2>Maximum Velocity</h2><p>When you\'re aiming for a world record, every frame counts.</p><h3>Key Speedrun Tactics</h3><p>Using Nidoking for its diverse movepool and abusing the X-Accuracy and Horn Drill combo is a staple.</p><p>Seeing that timer stop under 1:50:00 is the ultimate rush!</p>',
-        "slug": "fastest-kanto-clear",
-        "category": "Speedrunning",
-        "tags": "Speedrun, Glitches, Records",
-        "meta_title": "Fastest Kanto Clear",
-        "meta_keywords": "Pokemon Speedrun, Kanto Any%, Nidoking route, Pokemon records",
-        "meta_description": "Master the tactics required to clear the Kanto region in record-breaking time.",
-        "author": {"authorId": "auth-001", "name": "Ash Ketchum", "url": "https://api.dicebear.com/7.x/pixel-art/jpg?seed=Ash"},
-        "images": {"name": "Arcanine Speed", "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png"},
-        "cover_alt": None,
-        "faq_heading": None,
-        "faqs": None,
-        "redirect_url": None,
-        "site_id": "site-id-1",
-        "featured": False,
-        "created_at": 1711643800000,
-        "updated_at": SEED_TIMESTAMP,
-    },
-]
+# ─── Combine original + generated blogs ────────────────────────────────────
+blogs = generated_blogs
 
-categories = [
-    {"id": "cat-001", "category_name": "Gaming", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-002", "category_name": "Legendary", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-003", "category_name": "Starters", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-004", "category_name": "Ghost Type", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-005", "category_name": "Evolution", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-006", "category_name": "History", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "cat-007", "category_name": "Competitive", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-]
+# ─── Categories (Pokemon types) ────────────────────────────────────────────
+categories = generate_categories()
 
-tags = [
-    {"id": "tag-001", "tag_name": "pokemon", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-002", "tag_name": "nintendo", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-003", "tag_name": "retro-gaming", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-004", "tag_name": "Psychic", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-005", "tag_name": "Kanto", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-006", "tag_name": "Fire", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-007", "tag_name": "Water", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-008", "tag_name": "Grass", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-009", "tag_name": "Beginner-Guide", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-010", "tag_name": "Ghost", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-011", "tag_name": "Horror", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-012", "tag_name": "Lavender-Town", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-013", "tag_name": "Eevee", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-014", "tag_name": "Evolution", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-015", "tag_name": "Elemental-Stones", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-016", "tag_name": "Unown", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-017", "tag_name": "Johto", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-018", "tag_name": "Archaeology", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-019", "tag_name": "Badges", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-020", "tag_name": "Strategy", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-021", "tag_name": "Elite-Four", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-022", "tag_name": "Speedrun", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-023", "tag_name": "Glitches", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "tag-024", "tag_name": "Records", "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-]
+# ─── Tags ──────────────────────────────────────────────────────────────────
+tags = generate_tags()
 
+# ─── Navigation ────────────────────────────────────────────────────────────
 navigation = [
-    {"id": "nav-001", "name": "About", "link": "/about", "position": 1, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "nav-002", "name": "Privacy Policy", "link": "/privacy", "position": 2, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
-    {"id": "nav-003", "name": "Contact Us", "link": "/contact-us", "position": 3, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "nav-001", "name": "Pokedex", "link": "/pokedex", "position": 1, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "nav-002", "name": "Gym Guides", "link": "/gyms", "position": 2, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "nav-003", "name": "Elite Four", "link": "/elite-four", "position": 3, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "nav-004", "name": "Team Rocket Intel", "link": "/team-rocket", "position": 4, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "nav-005", "name": "About", "link": "/about", "position": 5, "site_id": "site-id-1", "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
 ]
 
 social_media = [
@@ -270,7 +59,7 @@ static_pages = [
         "id": "static-about",
         "title": "About Us",
         "slug": "about",
-        "description": "<section><h2>HELLO WORLD</h2><p>Founded in <strong>Pallet Town</strong>, our mission is to provide the most comprehensive research and news across the Kanto and Johto regions.</p></section>",
+        "description": "<section><h2>Welcome to the Kanto Pokedex Blog</h2><p>Founded in <strong>Pallet Town</strong>, our mission is to provide the most comprehensive Pokemon research and news across the Kanto region.</p><p>Whether you're a new trainer starting your journey or a seasoned Champion, we've got the guides you need to succeed.</p></section>",
         "site_id": "site-id-1",
         "created_at": SEED_TIMESTAMP,
         "updated_at": SEED_TIMESTAMP,
@@ -279,16 +68,34 @@ static_pages = [
         "id": "static-privacy",
         "title": "Privacy Policy",
         "slug": "privacy",
-        "description": "<section><h2>Your data is as safe as a Master Ball</h2><p>We take your privacy seriously. Your Trainer ID, location data, and party information are strictly confidential.</p></section>",
+        "description": "<section><h2>Your data is as safe as a Master Ball</h2><p>We take your privacy seriously. Your Trainer ID, location data, and party information are strictly confidential.</p><p>We never share your data with Team Rocket or any unauthorized organizations.</p></section>",
         "site_id": "site-id-1",
         "created_at": SEED_TIMESTAMP,
         "updated_at": SEED_TIMESTAMP,
     },
     {
-        "id": "static-contact-us",
+        "id": "static-contact",
         "title": "Get in Touch",
         "slug": "contact-us",
-        "description": "<section><h2>Visit any Pokémon Center or message us here</h2><p>Have a question about a specific evolution or a bug in your PC storage system? Our help desk is open 24/7.</p></section>",
+        "description": "<section><h2>Visit any Pokemon Center or message us here</h2><p>Have a question about a specific Pokemon evolution or need help with your PC storage system? Our help desk is open 24/7.</p><p>For urgent matters, contact Professor Oak's Laboratory directly.</p></section>",
+        "site_id": "site-id-1",
+        "created_at": SEED_TIMESTAMP,
+        "updated_at": SEED_TIMESTAMP,
+    },
+    {
+        "id": "static-elite-four",
+        "title": "The Elite Four",
+        "slug": "elite-four",
+        "description": "<section><h2>The Kanto Elite Four</h2><p>The final challenge before becoming Pokemon Champion. These four masters each specialize in a different type:</p><ul><li><strong>Lorelei</strong> - Ice Type Specialist</li><li><strong>Bruno</strong> - Fighting Type Master</li><li><strong>Agatha</strong> - Ghost Type Expert</li><li><strong>Lance</strong> - Dragon Type Champion</li></ul><p>Defeat all four to face the reigning Champion!</p></section>",
+        "site_id": "site-id-1",
+        "created_at": SEED_TIMESTAMP,
+        "updated_at": SEED_TIMESTAMP,
+    },
+    {
+        "id": "static-team-rocket",
+        "title": "Team Rocket Intel",
+        "slug": "team-rocket",
+        "description": "<section><h2>Classified: Team Rocket Dossier</h2><p>Team Rocket, led by the mysterious Giovanni, is a criminal organization that operates throughout Kanto.</p><p><strong>Known Operatives:</strong></p><ul><li>Jessie and James - Field agents (often defeated by Ash Ketchum)</li><li>Meowth - Rare Pokemon that can speak human language</li><li>Giovanni - Gym Leader of Viridian City (secret identity)</li></ul><p>If you encounter Team Rocket, report to the nearest Pokemon Center immediately.</p></section>",
         "site_id": "site-id-1",
         "created_at": SEED_TIMESTAMP,
         "updated_at": SEED_TIMESTAMP,
@@ -296,5 +103,12 @@ static_pages = [
 ]
 
 sites = [
-    {"id": "site-id-1", "name": "My Site", "is_active": True, "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
+    {"id": "site-id-1", "name": "Kanto Pokedex", "is_active": True, "created_at": SEED_TIMESTAMP, "updated_at": SEED_TIMESTAMP},
 ]
+
+# Print summary
+if __name__ == "__main__":
+    print(f"Total blogs: {len(blogs)}")
+    print(f"Total authors: {len(authors)}")
+    print(f"Total categories: {len(categories)}")
+    print(f"Total tags: {len(tags)}")

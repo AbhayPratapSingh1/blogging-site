@@ -1,18 +1,32 @@
-const StorageStatus = ({color, icon , total, present, desciption})=>{
-    const width = total > 0 ? `${Math.floor(Number(present / total * 100))}` : "0"
+const StorageStatus = ({color, icon, total, present, description})=>{
+    const width = total > 0 ? Math.floor(Number(present / total * 100)) : 0
+    const colorClasses = {
+        blue: 'bg-blue-500',
+        green: 'bg-green-500',
+        purple: 'bg-purple-500',
+        orange: 'bg-orange-500',
+        red: 'bg-red-500'
+    }
+    
     return (
-        <div className="flex gap-4">
-            <div className={`rounded-s bg-gray-200 ${"text-"+color+"-600"} text-2xl h-10 w-10 flex justify-center items-center`}>{icon}</div>
-            <div className="flex-grow leading-3 ">
-                <div className="w-full h-3 bg-gray-200 rounded-full my-2 relative">
-                <div style={{background:color, width:`${width}%`}} className={` absolute top-0 left-0 h-3 z-20 rounded-s-full`}/>
-                    {/* <div className={` absolute top-0 left-0 h-3 w-[20%]  ${"bg-"+color+"-500"} z-20 rounded-s-full`}/> */}
-                  
-                </div>
-                <div className="text-sm text-gray-400">{desciption}</div>
+        <div className="flex items-center gap-4">
+            <div className={`w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-600`}>
+                {icon}
             </div>
-            <p className="text-gray-400 w-10">{present}/{total}</p>
+            <div className="flex-grow">
+                <div className="flex justify-between items-center mb-1">
+                    <span className="text-sm text-gray-600">{description}</span>
+                    <span className="text-sm text-gray-500">{present}/{total}</span>
+                </div>
+                <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div 
+                        className={`h-full ${colorClasses[color] || 'bg-gray-500'} rounded-full transition-all duration-300`}
+                        style={{width: `${width}%`}}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
+
 export default StorageStatus
